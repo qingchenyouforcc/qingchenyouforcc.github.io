@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>C语言作业中的Bugs</title>
+      <link href="/C-C/bugs/"/>
+      <url>/C-C/bugs/</url>
+      
+        <content type="html"><![CDATA[<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><h4 id="清空缓存区"><a href="#清空缓存区" class="headerlink" title="清空缓存区"></a>清空缓存区</h4><p>连续输入时要记得清空缓存区,否则就会出现奇怪的bug</p><ol><li><p>使用scanf()</p><pre><code class="highlight c"><span class="built_in">scanf</span>(<span class="string">&quot;%*[^\n]&quot;</span>); <span class="built_in">scanf</span>(<span class="string">&quot;%*c&quot;</span>);</code></pre></li><li><p>使用while()</p><pre><code class="highlight c"><span class="keyword">while</span>((ch = getchar()) != ‘\n’ &amp;&amp; ch != EOF);</code></pre><p>万能语句</p></li><li><p>使用fflush()</p><pre><code class="highlight c">fflush(<span class="built_in">stdin</span>);</code></pre></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> C/C++ </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C/C++ </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Minecraft简单快速联机教程</title>
       <link href="/Minecraft-normal/MC_How_to_link/"/>
       <url>/Minecraft-normal/MC_How_to_link/</url>
