@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://blog.qingchenyou.asia/sitemap.xml
