@@ -92,13 +92,6 @@
 
   
   <url>
-    <loc>https://blog.qingchenyou.asia/tags/CTF/</loc>
-    <lastmod>2024-11-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.qingchenyou.asia/tags/C-C/</loc>
     <lastmod>2024-11-13</lastmod>
     <changefreq>weekly</changefreq>
@@ -112,14 +105,14 @@
     <priority>0.2</priority>
   </url>
   
-
-  
   <url>
-    <loc>https://blog.qingchenyou.asia/categories/CTF-WriteUP/</loc>
+    <loc>https://blog.qingchenyou.asia/tags/CTF/</loc>
     <lastmod>2024-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
+  
+
   
   <url>
     <loc>https://blog.qingchenyou.asia/categories/C-C/</loc>
@@ -130,6 +123,13 @@
   
   <url>
     <loc>https://blog.qingchenyou.asia/categories/Minecraft-normal/</loc>
+    <lastmod>2024-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.qingchenyou.asia/categories/CTF-WriteUP/</loc>
     <lastmod>2024-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
