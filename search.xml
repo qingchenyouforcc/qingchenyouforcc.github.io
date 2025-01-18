@@ -29,6 +29,31 @@
     
     
     <entry>
+      <title>ichuqiu24WDay1 WriteUP</title>
+      <link href="/CTF-WriteUP/ichunqiu_WPDay1/"/>
+      <url>/CTF-WriteUP/ichunqiu_WPDay1/</url>
+      
+        <content type="html"><![CDATA[<h1 id="2024春秋杯冬季赛-WriteUP"><a href="#2024春秋杯冬季赛-WriteUP" class="headerlink" title="2024春秋杯冬季赛 WriteUP"></a>2024春秋杯冬季赛 WriteUP</h1><h2 id="MSIC"><a href="#MSIC" class="headerlink" title="MSIC"></a>MSIC</h2><h4 id="简单算术"><a href="#简单算术" class="headerlink" title="简单算术"></a>简单算术</h4><p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250117153152243.png" alt="image-20250117153152243"></p><p>根据题目提示，猜测文本经过了异或加密</p><pre><code class="highlight python"><span class="keyword">def</span> <span class="title function_">xor_decrypt</span>(<span class="params">text, key</span>):    <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(<span class="built_in">chr</span>(<span class="built_in">ord</span>(c) ^ key) <span class="keyword">for</span> c <span class="keyword">in</span> text)encrypted_text = <span class="string">&quot;ys~xdg/m@]mjkz@vl@z~lf&gt;b&quot;</span><span class="comment"># 尝试常见的密钥 (0-255)</span><span class="keyword">for</span> key <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>):    decrypted = xor_decrypt(encrypted_text, key)    <span class="built_in">print</span>(<span class="string">f&quot;Key <span class="subst">&#123;<span class="built_in">hex</span>(key)&#125;</span>: <span class="subst">&#123;decrypted&#125;</span>&quot;</span>)</code></pre><p>运行后，发现Key 0x1f: flag{x0r_Brute_is_easy!}</p><p>得到flag</p><h4 id="简单镜像提取"><a href="#简单镜像提取" class="headerlink" title="简单镜像提取"></a>简单镜像提取</h4><p>使用wireshark打开查看后，发现其中有压缩包</p><p>尝试使用手动提取、binwalk提取和foremost提取</p><p>最后用foremost提取出正确文件disk-recovery.img</p><p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250117173738173.png" alt="image-20250117173738173"></p><p>使用bandzip打开后，发现其中为office文件格式</p><p>使用foremost继续提取，得到xls文件</p><p>打开后得到flag</p><p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250117173835926.png" alt="image-20250117173835926"></p><h4 id="See-anything-in-these-pics-timeout"><a href="#See-anything-in-these-pics-timeout" class="headerlink" title="See anything in these pics?(timeout)"></a>See anything in these pics?(timeout)</h4><p>拿到文件后，图片名称为aztec</p><p>打开图片后发现是aztec码，得到5FIVE</p><p>猜测为解压包密码，解压后得到YVL.jpg</p><p>使用foremost提取照片，得到一张纯黑png</p><p>crc校验后发现大小不对，修改后得到图片</p><p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250117210149095.png" alt="image-20250117210149095"></p><p>得到flag</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> CTF_WriteUP </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CTF </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>ciscn2025 WriteUP</title>
       <link href="/CTF-WriteUP/ciscn2025_wp/"/>
       <url>/CTF-WriteUP/ciscn2025_wp/</url>
