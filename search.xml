@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>ciscn2025UP WriteUP</title>
+      <link href="/CTF-WriteUP/ciscn2025_up_wp/"/>
+      <url>/CTF-WriteUP/ciscn2025_up_wp/</url>
+      
+        <content type="html"><![CDATA[<h1 id="ciscn2025半决赛-WriteUP"><a href="#ciscn2025半决赛-WriteUP" class="headerlink" title="ciscn2025半决赛 WriteUP"></a>ciscn2025半决赛 WriteUP</h1><p>Team: Im_@tEa_P0t<br><del>(半决赛三等奖,题实在是太难了)</del></p><h2 id="AWDP"><a href="#AWDP" class="headerlink" title="AWDP"></a>AWDP</h2><p>爆零了，真难</p><h2 id="ISW"><a href="#ISW" class="headerlink" title="ISW"></a>ISW</h2><h4 id="应急响应"><a href="#应急响应" class="headerlink" title="应急响应"></a>应急响应</h4><h5 id="题目1"><a href="#题目1" class="headerlink" title="题目1"></a>题目1</h5><p>我rs用不了，抽风了，没看raw亏死我了</p><p>首先连接服务器，使用tcpdump抓包，得到一个.pcap文件</p><p>然后使用scp下载下来</p><p>使用wireshark打开，找到统计-端点，之后就能发现那个异常ip</p><p>192.168.57.203:4948</p><p>转md5__小写__<del>(不是哥们你flag{MD5}卡了我半天)</del>然后得到flag</p><h5 id="题目2"><a href="#题目2" class="headerlink" title="题目2"></a>题目2</h5><p>已经知道了55658是通信端口，直接写脚本检测55658等待程序出现</p><p>嗯好，到结束了也没出现，临近比赛结束一小时的时候发现是可变端口，攻击机端口不可变</p><p>很好白等了，最后也没弄出来</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> CTF_WriteUP </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CTF </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>DASCTF WriteUP</title>
       <link href="/CTF-WriteUP/DASctf_wp/"/>
       <url>/CTF-WriteUP/DASctf_wp/</url>
