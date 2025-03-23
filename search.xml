@@ -8,7 +8,7 @@
       <link href="/Python/Python_skill/"/>
       <url>/Python/Python_skill/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><h3 id="start-stop-step"><a href="#start-stop-step" class="headerlink" title="[start:stop:step]"></a>[start:stop:step]</h3><p>是一种切片语法，它表示”从开始到结束，以步长 n 取元素”。</p><p>切片语法的完整形式是 <code>[start:stop:step]</code>，其中：</p><ul><li><code>start</code> 是起始索引（包含）</li><li><code>stop</code> 是结束索引（不包含）</li><li><code>step</code> 是步长（每次跳过的元素数量）</li></ul><p>当省略 <code>start</code> 和 <code>stop</code> 时（如 <code>[::n]</code>），意味着使用默认值 - 从列表的开始到结束。</p><p>例如：</p><ul><li><code>[::1]</code> 表示获取所有元素（步长为1，相当于原列表的副本）</li><li><code>[::2]</code> 表示获取每隔一个的元素（索引为0, 2, 4…的元素）</li><li><code>[::-1]</code> 表示反转列表（步长为-1，从后向前取元素）</li></ul>]]></content>
       
       
       <categories>
