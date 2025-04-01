@@ -9,8 +9,24 @@
 
 
     <url>
+        <loc>https://blog.qingchenyou.asia/CTF-WriteUP/digit_china_wp/</loc>
+        <lastmod>2025-04-01T09:32:07.661Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://blog.qingchenyou.asia/CTF-WriteUP/ownPra_re/</loc>
+        <lastmod>2025-03-23T15:21:13.183Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://blog.qingchenyou.asia/Python/Python_skill/</loc>
-        <lastmod>2025-03-23T13:35:39.156Z</lastmod>
+        <lastmod>2025-03-23T14:52:45.356Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
