@@ -9,6 +9,14 @@
 
 
     <url>
+        <loc>https://blog.qingchenyou.asia/CTF-WriteUP/fic26_wp/</loc>
+        <lastmod>2026-04-25T15:09:45.006Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://blog.qingchenyou.asia/CTF-WriteUP/LilCTF_AIwp/</loc>
         <lastmod>2026-04-18T15:25:57.220Z</lastmod>
         <changefreq>weekly</changefreq>
