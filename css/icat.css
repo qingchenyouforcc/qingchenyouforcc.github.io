@@ -91,27 +91,54 @@
     --icat-radius-sm: 10px;
     --icat-radius-md: 14px;
     --icat-radius-lg: 18px;
-    --icat-glass-bg: rgba(255, 255, 255, 0.72);
+    --icat-page-bg: rgba(245, 249, 255, 0.38);
+    --icat-glass-bg: rgba(255, 255, 255, 0.70);
+    --icat-nav-glass-bg: rgba(255, 255, 255, 0.64);
+    --icat-sidebar-bg: rgba(246, 248, 250, 0.70);
+    --icat-search-bg: rgba(246, 248, 250, 0.76);
     --icat-glass-border: rgba(255, 255, 255, 0.56);
     --icat-glass-shadow: 0 12px 36px rgba(15, 23, 42, 0.10);
     --icat-glass-hover-shadow: 0 18px 48px rgba(15, 23, 42, 0.16);
     --icat-soft-shadow: 0 10px 30px rgba(73, 177, 245, 0.12);
+    --icat-glass-filter: blur(16px) saturate(1.18);
+    --icat-menu-glass-filter: blur(14px) saturate(1.16);
+    --icat-nav-glass-filter: blur(18px) saturate(1.2);
+    --icat-rightside-glass-filter: blur(12px);
+    --global-bg: var(--icat-page-bg);
+    --card-bg: var(--icat-glass-bg);
+    --sidebar-bg: var(--icat-sidebar-bg);
+    --sidebar-menu-bg: var(--icat-glass-bg);
+    --search-bg: var(--icat-search-bg);
+    --tab-button-active-bg: var(--icat-glass-bg);
 }
 
 [data-theme='dark'] {
     --icat-secondbg: rgba(255, 255, 255, 0.10);
+    --icat-page-bg: rgba(13, 13, 13, 0.36);
     --icat-glass-bg: rgba(24, 24, 27, 0.70);
+    --icat-nav-glass-bg: rgba(18, 18, 18, 0.72);
+    --icat-sidebar-bg: rgba(18, 18, 18, 0.70);
+    --icat-search-bg: rgba(18, 18, 18, 0.78);
     --icat-glass-border: rgba(255, 255, 255, 0.10);
     --icat-glass-shadow: 0 14px 38px rgba(0, 0, 0, 0.34);
     --icat-glass-hover-shadow: 0 20px 52px rgba(0, 0, 0, 0.46);
     --icat-soft-shadow: 0 10px 32px rgba(73, 177, 245, 0.10);
+    --global-bg: var(--icat-page-bg);
+    --card-bg: var(--icat-glass-bg);
+    --sidebar-bg: var(--icat-sidebar-bg);
+    --sidebar-menu-bg: var(--icat-glass-bg);
+    --search-bg: var(--icat-search-bg);
+    --tab-button-active-bg: var(--icat-glass-bg);
 }
 
 html.no-glassmorphism {
-    --icat-glass-bg: var(--card-bg);
     --icat-glass-border: rgba(73, 177, 245, 0.12);
     --icat-glass-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
     --icat-glass-hover-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+    --icat-glass-filter: none;
+    --icat-menu-glass-filter: none;
+    --icat-nav-glass-filter: none;
+    --icat-rightside-glass-filter: none;
 }
 
 html.no-glassmorphism[data-theme='dark'] {
@@ -129,13 +156,18 @@ html.no-glassmorphism[data-theme='dark'] {
 #pagination .page-number,
 #pagination .extend,
 #post-comment,
+.article-sort-item,
+.timeline,
+.search-dialog,
+.local-search-box input,
+.menus_item_child,
 .layout > div:first-child:not(.nc) {
     border: 1px solid var(--icat-glass-border);
     border-radius: var(--icat-radius-lg);
     background: var(--icat-glass-bg);
     box-shadow: var(--icat-glass-shadow);
-    backdrop-filter: blur(16px) saturate(1.18);
-    -webkit-backdrop-filter: blur(16px) saturate(1.18);
+    backdrop-filter: var(--icat-glass-filter);
+    -webkit-backdrop-filter: var(--icat-glass-filter);
 }
 
 html.no-glassmorphism #page,
@@ -147,6 +179,10 @@ html.no-glassmorphism #aside-content .card-widget,
 html.no-glassmorphism #pagination .page-number,
 html.no-glassmorphism #pagination .extend,
 html.no-glassmorphism #post-comment,
+html.no-glassmorphism .article-sort-item,
+html.no-glassmorphism .timeline,
+html.no-glassmorphism .search-dialog,
+html.no-glassmorphism .local-search-box input,
 html.no-glassmorphism .layout > div:first-child:not(.nc),
 html.no-glassmorphism #nav .menus_items .menus_item .menus_item_child,
 html.no-glassmorphism #nav .menus_items .icat_menus_item .menus_item_child,
@@ -186,16 +222,15 @@ html.no-glassmorphism #recent-posts .recent-post-item {
 #page-header.nav-fixed #nav,
 #page-header.not-top-img #nav,
 #nav.show {
-    background: rgba(255, 255, 255, 0.68);
+    background: var(--icat-nav-glass-bg);
     box-shadow: 0 10px 32px rgba(15, 23, 42, 0.08);
-    backdrop-filter: blur(18px) saturate(1.2);
-    -webkit-backdrop-filter: blur(18px) saturate(1.2);
+    backdrop-filter: var(--icat-nav-glass-filter);
+    -webkit-backdrop-filter: var(--icat-nav-glass-filter);
 }
 
 html.no-glassmorphism #page-header.nav-fixed #nav,
 html.no-glassmorphism #page-header.not-top-img #nav,
 html.no-glassmorphism #nav.show {
-    background: rgba(255, 255, 255, 0.94);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
 }
@@ -203,14 +238,7 @@ html.no-glassmorphism #nav.show {
 [data-theme='dark'] #page-header.nav-fixed #nav,
 [data-theme='dark'] #page-header.not-top-img #nav,
 [data-theme='dark'] #nav.show {
-    background: rgba(18, 18, 18, 0.72);
     box-shadow: 0 10px 32px rgba(0, 0, 0, 0.28);
-}
-
-html.no-glassmorphism[data-theme='dark'] #page-header.nav-fixed #nav,
-html.no-glassmorphism[data-theme='dark'] #page-header.not-top-img #nav,
-html.no-glassmorphism[data-theme='dark'] #nav.show {
-    background: rgba(18, 18, 18, 0.96);
 }
 
 #nav .menus_items .menus_item .menus_item_child,
@@ -218,8 +246,8 @@ html.no-glassmorphism[data-theme='dark'] #nav.show {
     border-radius: var(--icat-radius-md);
     background: var(--icat-glass-bg);
     box-shadow: var(--icat-glass-shadow);
-    backdrop-filter: blur(14px) saturate(1.16);
-    -webkit-backdrop-filter: blur(14px) saturate(1.16);
+    backdrop-filter: var(--icat-menu-glass-filter);
+    -webkit-backdrop-filter: var(--icat-menu-glass-filter);
     overflow: hidden;
 }
 
@@ -373,8 +401,8 @@ html.icat-theme-switching *::after {
 #rightside > div > button,
 #rightside > div > a {
     border-radius: 12px;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: var(--icat-rightside-glass-filter);
+    -webkit-backdrop-filter: var(--icat-rightside-glass-filter);
 }
 
 .categoryBar-list-item {
@@ -392,8 +420,56 @@ html.icat-theme-switching *::after {
     border-radius: var(--icat-radius-lg);
     background: var(--icat-glass-bg);
     box-shadow: var(--icat-glass-shadow);
-    backdrop-filter: blur(16px) saturate(1.18);
-    -webkit-backdrop-filter: blur(16px) saturate(1.18);
+    backdrop-filter: var(--icat-glass-filter);
+    -webkit-backdrop-filter: var(--icat-glass-filter);
+}
+
+#recent-posts .recent-post-item.has-cover-bg {
+    isolation: isolate;
+    background: transparent;
+}
+
+#recent-posts .recent-post-item.has-cover-bg::before,
+#recent-posts .recent-post-item.has-cover-bg::after {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    content: "";
+}
+
+#recent-posts .recent-post-item.has-cover-bg::before {
+    z-index: -2;
+    background-image: var(--icat-post-cover);
+    background-position: center;
+    background-size: cover;
+    filter: saturate(1.08);
+    transform: scale(1.03);
+    transition: transform .36s ease, filter .36s ease;
+}
+
+#recent-posts .recent-post-item.has-cover-bg::after {
+    z-index: -1;
+    background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.68), rgba(255, 255, 255, 0.46)),
+        var(--icat-glass-bg);
+    backdrop-filter: var(--icat-glass-filter);
+    -webkit-backdrop-filter: var(--icat-glass-filter);
+}
+
+html.no-glassmorphism #recent-posts .recent-post-item.has-cover-bg::after {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+[data-theme='dark'] #recent-posts .recent-post-item.has-cover-bg::after {
+    background:
+        linear-gradient(90deg, rgba(18, 18, 18, 0.70), rgba(18, 18, 18, 0.48)),
+        var(--icat-glass-bg);
+}
+
+#recent-posts .recent-post-item.has-cover-bg:hover::before {
+    filter: saturate(1.16);
+    transform: scale(1.08);
 }
 
 #recent-posts .recent-post-item:hover {
