@@ -580,6 +580,19 @@ document.addEventListener('DOMContentLoaded', () => {
   /**
    * Rightside
    */
+  const updateGlassmodeButton = () => {
+    const glassButton = document.getElementById('glassmode')
+    if (!glassButton) return
+
+    const isGlassOn = !document.documentElement.classList.contains('no-glassmorphism')
+    glassButton.classList.toggle('off', !isGlassOn)
+    glassButton.title = isGlassOn ? '关闭毛玻璃效果' : '开启毛玻璃效果'
+    const icon = glassButton.querySelector('i')
+    if (icon) {
+      icon.className = isGlassOn ? 'fas fa-gem' : 'fas fa-gem glassmode-off-icon'
+    }
+  }
+
   const rightSideFn = {
     readmode: () => { // read mode
       const $body = document.body
@@ -628,6 +641,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const saveStatus = $htmlDom.contains('hide-aside') ? 'show' : 'hide'
       btf.saveToLocal.set('aside-status', saveStatus, 2)
       $htmlDom.toggle('hide-aside')
+    },
+    glassmode: () => { // switch glassmorphism effect
+      const $htmlDom = document.documentElement.classList
+      const willGlassOn = $htmlDom.contains('no-glassmorphism')
+      $htmlDom.toggle('no-glassmorphism', !willGlassOn)
+      btf.saveToLocal.set('icat-glassmorphism', willGlassOn ? 'on' : 'off', 30)
+      updateGlassmodeButton()
+      if (GLOBAL_CONFIG.Snackbar !== undefined) {
+        btf.snackbarShow(willGlassOn ? '毛玻璃效果已开启' : '毛玻璃效果已关闭')
+      }
     },
     'mobile-toc-button': (p, item) => { // Show mobile toc
       const tocEle = document.getElementById('card-toc')
@@ -906,6 +929,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     GLOBAL_CONFIG_SITE.isHome && scrollDownInIndex()
     scrollFn()
+    updateGlassmodeButton()
 
     forPostFn()
     !GLOBAL_CONFIG_SITE.isShuoshuo && btf.switchComments(document)
