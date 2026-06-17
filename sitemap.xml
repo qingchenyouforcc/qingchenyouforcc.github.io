@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.qingchenyou.asia/about/</loc>
+    
+    <lastmod>2026-06-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.qingchenyou.asia/link/</loc>
     
     <lastmod>2026-06-17</lastmod>
@@ -21,15 +30,6 @@
   
   <url>
     <loc>https://blog.qingchenyou.asia/categories/</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.qingchenyou.asia/about/</loc>
     
     <lastmod>2026-06-17</lastmod>
     
