@@ -2,15 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.qingchenyou.asia/google40613aa0e7310c9f</loc>
-    
-    <lastmod>2026-06-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.qingchenyou.asia/link/</loc>
     
     <lastmod>2026-06-17</lastmod>
@@ -297,14 +288,14 @@
   </url>
   
   <url>
-    <loc>https://blog.qingchenyou.asia/tags/Python/</loc>
+    <loc>https://blog.qingchenyou.asia/tags/Minecraft/</loc>
     <lastmod>2026-06-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.qingchenyou.asia/tags/Minecraft/</loc>
+    <loc>https://blog.qingchenyou.asia/tags/Python/</loc>
     <lastmod>2026-06-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -334,14 +325,14 @@
   </url>
   
   <url>
-    <loc>https://blog.qingchenyou.asia/categories/Python/</loc>
+    <loc>https://blog.qingchenyou.asia/categories/Minecraft-normal/</loc>
     <lastmod>2026-06-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.qingchenyou.asia/categories/Minecraft-normal/</loc>
+    <loc>https://blog.qingchenyou.asia/categories/Python/</loc>
     <lastmod>2026-06-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
