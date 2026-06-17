@@ -281,6 +281,13 @@
 
   
   <url>
+    <loc>https://blog.qingchenyou.asia/tags/Python/</loc>
+    <lastmod>2026-06-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.qingchenyou.asia/tags/CTF/</loc>
     <lastmod>2026-06-17</lastmod>
     <changefreq>weekly</changefreq>
@@ -289,13 +296,6 @@
   
   <url>
     <loc>https://blog.qingchenyou.asia/tags/Minecraft/</loc>
-    <lastmod>2026-06-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.qingchenyou.asia/tags/Python/</loc>
     <lastmod>2026-06-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -318,6 +318,13 @@
 
   
   <url>
+    <loc>https://blog.qingchenyou.asia/categories/Python/</loc>
+    <lastmod>2026-06-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.qingchenyou.asia/categories/CTF-WriteUP/</loc>
     <lastmod>2026-06-17</lastmod>
     <changefreq>weekly</changefreq>
@@ -326,13 +333,6 @@
   
   <url>
     <loc>https://blog.qingchenyou.asia/categories/Minecraft-normal/</loc>
-    <lastmod>2026-06-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.qingchenyou.asia/categories/Python/</loc>
     <lastmod>2026-06-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
