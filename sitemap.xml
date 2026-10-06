@@ -2,18 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.qingchenyou.asia/%E9%9A%8F%E7%AC%94/uniqlo_easteregg/</loc>
+    <loc>https://blog.qingchenyou.asia/about/</loc>
     
-    <lastmod>2026-07-25</lastmod>
+    <lastmod>2026-10-06</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://blog.qingchenyou.asia/about/</loc>
+    <loc>https://blog.qingchenyou.asia/%E9%9A%8F%E7%AC%94/uniqlo_easteregg/</loc>
     
-    <lastmod>2026-07-20</lastmod>
+    <lastmod>2026-07-25</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -283,7 +283,7 @@
 
   <url>
     <loc>https://blog.qingchenyou.asia/</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
